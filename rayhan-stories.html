@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
@@ -7,136 +8,300 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=JetBrains+Mono:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#050508;font-family:system-ui,-apple-system,sans-serif;color:#fff;min-height:100vh}
+body{background:#050508;font-family:system-ui,-apple-system,sans-serif;color:#fff;min-height:100vh;padding-bottom:100px}
 button{cursor:pointer;font-family:'JetBrains Mono',monospace;border:none;outline:none}
-textarea{font-family:'JetBrains Mono',monospace;outline:none;resize:vertical}
+textarea,input[type=text],select{font-family:'JetBrains Mono',monospace;outline:none}
 ::-webkit-scrollbar{width:4px;height:4px}
 ::-webkit-scrollbar-track{background:#0a0a0f}
 ::-webkit-scrollbar-thumb{background:#1a1a2e;border-radius:2px}
-.hdr{padding:14px 10px 4px;display:flex;align-items:center;gap:8px}
-.logo{width:28px;height:28px;background:#e94560;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;color:#fff;font-family:monospace}
-.tt{font-size:14px;font-family:'Space Mono',monospace;font-weight:800}
-.st{color:#2a2a2a;font-size:8px;font-family:monospace;letter-spacing:2px}
-.nv{display:flex;gap:4px;padding:6px 10px;position:sticky;top:0;background:#050508;z-index:50}
-.nv button{flex:1;padding:9px;border-radius:7px;font-size:11px;font-weight:700}
-.nv .ac{background:#e94560;color:#fff}
-.nv .in{background:#0c0c18;color:#3a3a3a}
-.ds{display:flex;gap:3px;padding:8px 10px;overflow-x:auto}
-.ds button{flex:0 0 auto;padding:6px 12px;border-radius:14px;font-size:11px;font-weight:700}
-.ds .ac{background:#e94560;color:#fff}
-.ds .in{background:#0c0c18;color:#3a3a3a}
-.dh{margin:2px 10px 6px;background:#09090f;border:1px solid #141425;border-radius:10px;padding:12px}
-.dt{font-size:17px;font-family:'Space Mono',monospace;font-weight:800}
-.da{color:#e94560;font-size:10px;font-family:monospace;font-weight:700;margin-top:3px}
-.df{color:#6a0572;font-size:9px;font-family:monospace;font-weight:700;margin-top:4px}
-.pb{margin-top:8px;height:3px;background:#0c0c0c;border-radius:2px;overflow:hidden}
-.pi{height:100%;border-radius:2px;transition:width .3s}
-.cd{background:#09090f;border:1px solid #141425;border-radius:10px;margin:0 10px 6px;transition:all .15s}
-.cd.dn{background:#060d06;border-color:#1a3a1a;opacity:.45}
-.ci{padding:10px 12px;display:flex;gap:10px;align-items:flex-start}
-.ck{width:18px;height:18px;border-radius:50%;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:9px;color:#fff;border:2px solid;background:transparent}
-.ck.dn{background:#2a7a2a;border-color:#2a7a2a}
-.cb{font-size:8px;font-weight:800;letter-spacing:1.5px;font-family:monospace}
-.ct{color:#e94560;font-size:11px;font-family:monospace;font-weight:800}
-.cn{font-size:13px;font-weight:600;line-height:1.3;margin:3px 0 0}
-.cn.dn{color:#333;text-decoration:line-through}
-.cn.ac{color:#e8e8f0}
-.mg{margin-top:8px;display:grid;grid-template-columns:1fr 1fr;gap:4px 8px}
-.ml{color:#3a3a50;font-size:8px;font-weight:700;letter-spacing:1px;font-family:monospace}
-.mv{font-size:11px;line-height:1.3;margin:1px 0 0}
-.mv.dn{color:#2a2a2a}
-.mv.ac{color:#8888aa}
-.mf{grid-column:1/3}
-.mf .mv{font-style:italic}
-.mf .mv.ac{color:#c0c0d8}
-.eb{margin-top:6px;background:#0c0c18;border:1px solid #1a1a2e;border-radius:5px;padding:3px 8px;font-size:9px;font-weight:700}
-.ef{margin-top:8px;display:flex;flex-direction:column;gap:6px;padding-right:4px}
-.ef textarea{width:100%;background:#06060c;border:1px solid #1a1a2e;color:#aaa;border-radius:5px;padding:6px 8px;font-size:11px;line-height:1.3}
-.bl{padding:10px;padding-bottom:80px}
-.bb{width:100%;display:flex;align-items:center;gap:10px;background:#09090f;border-radius:8px;padding:12px;margin-bottom:5px;text-align:left}
-.be{font-size:18px}
-.bn{font-size:13px;font-family:'Space Mono',monospace;color:#fff}
-.bc{color:#333;font-size:9px;font-family:monospace}
 </style>
 </head>
 <body>
 <div id="app"></div>
 <script>
 (function(){
-var DAYS=["Segunda","Ter\u00e7a","Quarta","Quinta","Sexta","S\u00e1bado","Domingo"];
-var BM={B1:{n:"ABERTURA",c:"#e94560",e:"\u25c9"},B2:{n:"ROTINA MATINAL",c:"#0f3460",e:"\u2600"},B3:{n:"PRODUTIVIDADE",c:"#034078",e:"\u26a1"},B4:{n:"CONVERSA",c:"#e43f5a",e:"\ud83d\udcac"},B5:{n:"POSICIONAMENTO",c:"#c72c41",e:"\ud83d\udccd"},B6:{n:"PROTOCOLO SONO",c:"#6a0572",e:"\u263d"},B7:{n:"FECHAMENTO",c:"#950740",e:"\u2b1b"}};
-function mk(t,b,d,fo,ce,el,fa){return{t:t,b:b,d:d,fo:fo,ce:ce,el:el,fa:fa}}
-var DATA={};
-DATA["Segunda"]=[mk("06:30","B1","S1 \u2014 Abertura","V\u00eddeo falando (fixo)","Quarto, luz baixa","Rosto rec\u00e9m-acordado","Agenda do dia + 'O dia come\u00e7ou ontem.'"),mk("06:30","B1","S2 \u2014 Contexto do dia","Foto + texto","\u2014","T\u00eanis / cama arrumada / celular","'Tudo cabe num dia. Se voc\u00ea dormiu.'"),mk("06:30","B2","H\u00e1bito matinal 1","V\u00eddeo sem fala + texto","Banheiro / quarto","Chuveiro / p\u00e9s no ch\u00e3o / sol","Bord\u00e3o: 'Primeiro choque do dia.' ou porqu\u00ea t\u00e9cnico"),mk("06:35","B2","H\u00e1bito matinal 2","Foto + texto","Quarto / janela","Copo d'\u00e1gua / celular longe / alongamento","Porqu\u00ea t\u00e9cnico ou consist\u00eancia"),mk("06:50","B2","Treino \u2014 indo","Foto + texto","Caminho academia, rua","T\u00eanis, mochila, rua escura","'06:45. Treino. Segunda come\u00e7ou.'"),mk("08:15","B2","Treino \u2014 p\u00f3s","V\u00eddeo falando","Academia","Rosto suado, sem filtro","Conex\u00e3o treino\u2192sono ou vulnerabilidade"),mk("08:45","B3","Faculdade","Foto + texto","Sala de aula","Caderno, caneta","Contexto ou aprendizado extra\u00eddo da aula"),mk("09:30","B4","Enquete ou Caixinha","Foto + sticker","Foto do momento","Mesa, caf\u00e9, p\u00f3s-treino","Pergunta: dor ou comportamento da audi\u00eancia"),mk("10:10","B2","Rayhan","Storyvlog","Mesa, computador","Tela, caderno, fone","'O que voc\u00eas veem na semana sai daqui.'"),mk("12:30","B3","Almo\u00e7o","Foto + texto","Mesa","Prato forte","'Refei\u00e7\u00e3o forte. Janta leve. Sono agradece.'"),mk("13:10","B3","Nyx Project","Storyvlog","Mesa trabalho","Computador, caderno, fone","'Deep work. 4h de foco > 10h de distra\u00e7\u00e3o.'"),mk("13:30","B4","Resposta caixinha","Print + texto","\u2014","Print da resposta","Dar nome ao problema + solu\u00e7\u00e3o + CTA"),mk("14:30","B3","Reflex\u00e3o / Contrapopular","Tela preta + texto","\u2014","\u2014","'Motiva\u00e7\u00e3o de segunda n\u00e3o vem de podcast. Vem de sono.'"),mk("15:00","B5","Posicionamento","Embutido em outro story","\u2014","\u2014","'Pra quem n\u00e3o sabe, eu crio conte\u00fado sobre sono e produtividade.'"),mk("15:30","B3","Pausa anti-estresse","Foto + texto","Corredor, ar livre","M\u00e3o no peito, passos","'O estresse n\u00e3o acumula se voc\u00ea n\u00e3o deixa.'"),mk("16:30","B3","Janta","Foto + texto","Mesa","Prato leve","'\u00daltima refei\u00e7\u00e3o. Depois: s\u00f3 banana e ch\u00e1.'"),mk("17:10","B3","Leitura 17h","Storyvlog","Ambiente calmo","Livro aberto, luz tarde","'Leitura. Desacelera\u00e7\u00e3o. Primeiro passo do protocolo.'"),mk("18:30","B3","Faculdade noite","Foto + texto","Sala de aula","Caderno, \u00f3culos bloqueadores","'Faculdade de \u00f3culos bloqueadores. Zero luz azul.'"),mk("19:45","B3","Di\u00e1rio","Foto + texto","Mesa","Di\u00e1rio aberto, caneta","'Journaling. Esvaziar a cabe\u00e7a antes de dormir.'"),mk("20:15","B3","Aula noite 2","Foto + texto","Sala de aula","Caderno, \u00f3culos bloqueadores","Contexto"),mk("21:15","B6","Banho quente + reflex\u00e3o","V\u00eddeo falando (calmo)","Banheiro, luz quente","Vapor, luz quente","'A parte mais importante do dia: parar.'"),mk("22:00","B6","Etapa protocolo","Foto + texto","Quarto preparado","Ch\u00e1, banana, difusor","Porqu\u00ea t\u00e9cnico: triptofano, apigenina, lavanda"),mk("22:15","B6","Etapa protocolo 2","Foto + texto","Quarto escuro","Blackout, protetor, dilatador","'Escurid\u00e3o total. Cada etapa \u00e9 um sinal pro c\u00e9rebro.'"),mk("22:30","B6","Leitura noturna","Storyvlog","Quarto, luz m\u00ednima","Livro, luz quente","'Leitura. O arco do livro: aberto de manh\u00e3, fechado de noite.'"),mk("22:50","B7","Ponto final","Foto escura / tela preta","Quarto escuro","Escurid\u00e3o, celular modo avi\u00e3o","'Segunda sobrevivida. Ponto final.'")];
-DATA["Ter\u00e7a"]=[mk("06:30","B1","S1 \u2014 Abertura","Foto + texto","Janela / quarto","Janela, p\u00e9s cama, celular 06:30","'06:30. Ter\u00e7a. Mesmo hor\u00e1rio. O dia come\u00e7ou ontem.'"),mk("06:30","B1","S2 \u2014 Contexto","Foto + texto","\u2014","Copo d'\u00e1gua, mesa","'Sem drama. Dormiu bem, acordou bem.'"),mk("06:30","B2","H\u00e1bito matinal 1","V\u00eddeo sem fala + texto","Banheiro / quarto","Chuveiro / sol / grounding","Bord\u00e3o ou porqu\u00ea t\u00e9cnico"),mk("06:35","B2","H\u00e1bito matinal 2","Foto + texto","Quarto / janela","\u00c1gua / celular longe / alongamento","Porqu\u00ea t\u00e9cnico"),mk("06:50","B2","Rayhan","Storyvlog","Mesa, computador","Tela, caderno","'Produ\u00e7\u00e3o de conte\u00fado antes do treino.'"),mk("10:10","B2","Treino \u2014 indo","Foto + texto","Caminho academia","T\u00eanis, rua","'10:00. 3h de produ\u00e7\u00e3o rendidas. Agora o corpo.'"),mk("12:00","B2","Treino \u2014 corrida","V\u00eddeo sem fala + texto","Ar livre","P\u00e9s, percurso, suado","'Corrida. O estresse sai pelas pernas.'"),mk("09:30","B4","Caixinha \u2014 dor","Foto + sticker","Mesa trabalho","Caf\u00e9, caderno","'O que mais te impede de dormir?'"),mk("12:30","B3","Almo\u00e7o","Foto + texto","Mesa","Prato forte","'Almo\u00e7o forte.'"),mk("13:10","B3","Nyx Project","Storyvlog","Mesa","Computador, fone","'Deep work.'"),mk("13:30","B4","Resposta 1","Print + texto","\u2014","Print","Dar nome + solu\u00e7\u00e3o aplic\u00e1vel"),mk("14:30","B4","Resposta 2","Print + v\u00eddeo falando","\u2014","Print","Aprofundar + posicionamento embutido"),mk("15:30","B3","Pausa","Foto + texto","Corredor","Respira\u00e7\u00e3o, caminhada","'O estresse n\u00e3o acumula se voc\u00ea n\u00e3o deixa.'"),mk("16:30","B3","Janta","Foto + texto","Mesa","Prato leve","'\u00daltima refei\u00e7\u00e3o.'"),mk("17:10","B3","Leitura 17h","Storyvlog","Ambiente calmo","Livro","'Desacelera\u00e7\u00e3o.'"),mk("18:30","B3","Faculdade","Foto + texto","Sala","Caderno, \u00f3culos bloqueadores","Contexto"),mk("19:45","B3","Di\u00e1rio","Foto + texto","Mesa","Di\u00e1rio","'Journaling.'"),mk("20:30","B6","Banho quente + reflex\u00e3o","V\u00eddeo falando (calmo)","Banheiro, luz quente","Vapor","'A parte mais importante: parar.'"),mk("21:00","B6","Etapa protocolo","Foto + texto","Quarto","Ch\u00e1, difusor, celular fora","Porqu\u00ea t\u00e9cnico"),mk("21:30","B6","Leitura noturna","Storyvlog","Quarto, luz m\u00ednima","Livro","'Arco do livro.'"),mk("22:10","B6","Etapa protocolo 2","Foto + texto","Quarto escuro","Blackout, protetor, 4-7-8","'Escurid\u00e3o total.'"),mk("22:50","B7","Ponto final","Foto escura + texto","Quarto escuro","Escurid\u00e3o","'Ponto final. Boa noite.'")];
-DATA["Quarta"]=[mk("06:30","B1","S1 \u2014 Abertura","Foto + texto","Janela / cortina","Janela, cama, livro","'Quarta. Metade da semana. O dia come\u00e7ou ontem.'"),mk("06:30","B1","S2 \u2014 Contexto","V\u00eddeo falando","\u2014","Rosto","'3 noites de protocolo. O acumulado aparece.'"),mk("06:30","B2","H\u00e1bito matinal 1","V\u00eddeo sem fala + texto","Banheiro / quarto","Chuveiro / sol / p\u00e9s","Bord\u00e3o ou porqu\u00ea"),mk("06:50","B2","Rayhan (curto)","Storyvlog","Mesa","Computador","'45 min de produ\u00e7\u00e3o. Depois: treino.'"),mk("07:35","B2","H\u00e1bito matinal 2","Foto + texto","Quarto / janela","\u00c1gua / respira\u00e7\u00e3o / alongamento","'Antes do treino.'"),mk("07:50","B2","Treino","V\u00eddeo sem fala + texto","Academia","Execu\u00e7\u00e3o, peso","'Terceiro dia seguido.'"),mk("09:30","B2","Corrida","V\u00eddeo sem fala + texto","Ar livre","Percurso, paisagem","'O estresse sai pelas pernas.'"),mk("10:15","B3","Aula","Foto + texto","Sala","Caderno","Contexto"),mk("11:00","B4","Caixinha \u2014 opini\u00e3o","Foto + sticker","Livro, caf\u00e9","Mesa","'Trabalhar mais = produzir mais?'"),mk("12:30","B3","Almo\u00e7o","Foto + texto","Mesa","Prato forte","'Refei\u00e7\u00e3o forte.'"),mk("13:10","B3","Nyx Project","Storyvlog","Mesa","Computador","'Deep work.'"),mk("13:30","B4","Resposta","Print + texto","\u2014","Print","Contrapopular a partir da resposta"),mk("14:30","B3","Reflex\u00e3o / Contrapopular","Tela preta + texto","\u2014","\u2014","'Voc\u00ea n\u00e3o t\u00e1 cansado porque trabalha muito. T\u00e1 cansado porque dorme mal.'"),mk("15:30","B3","Pausa","Foto + texto","Corredor","Respira\u00e7\u00e3o","'Pausa.'"),mk("16:30","B3","Janta","Foto + texto","Mesa","Prato leve","'\u00daltima refei\u00e7\u00e3o.'"),mk("17:10","B3","Leitura 17h","Storyvlog","Ambiente calmo","Livro","'Desacelera\u00e7\u00e3o.'"),mk("18:30","B3","Faculdade noite","Foto + texto","Sala","\u00d3culos bloqueadores","Contexto"),mk("19:45","B3","Di\u00e1rio","Foto + texto","Mesa","Di\u00e1rio","'Journaling.'"),mk("20:30","B6","Banho quente + reflex\u00e3o","V\u00eddeo falando (calmo)","Banheiro","Vapor","'O protocolo n\u00e3o \u00e9 lista. \u00c9 linguagem corporal.'"),mk("21:00","B6","Etapa protocolo","Foto + texto","Quarto","Ch\u00e1, difusor, celular fora","Porqu\u00ea t\u00e9cnico"),mk("21:30","B6","Leitura noturna","Storyvlog","Quarto","Livro","'Arco do livro.'"),mk("22:10","B6","Etapa protocolo 2","Foto + texto","Quarto escuro","Blackout","'Escurid\u00e3o total.'"),mk("22:50","B7","Ponto final","Tela preta + texto","\u2014","\u2014","'Metade da semana. Ponto final. Amanh\u00e3: protocolo completo.'")];
-DATA["Quinta"]=[mk("06:30","B1","S1 \u2014 Abertura","V\u00eddeo falando / Foto","Quarto / janela","Rosto, silhueta, objetos protocolo","'Dormi 22:30, acordei sem despertador.'"),mk("06:30","B1","S2 \u2014 Gancho protocolo (fixo)","V\u00eddeo falando / Foto","\u2014","Rosto, objetos cabeceira","'Hoje \u00e0 noite: protocolo completo. Fica at\u00e9 o final.'"),mk("06:30","B2","H\u00e1bito matinal 1","V\u00eddeo sem fala + texto","Banheiro / quarto","Chuveiro / sol / grounding","Bord\u00e3o ou porqu\u00ea"),mk("06:35","B2","H\u00e1bito matinal 2","Foto + texto","Quarto / janela","\u00c1gua / celular longe / alongamento","Porqu\u00ea t\u00e9cnico"),mk("06:50","B2","Rayhan","Storyvlog","Mesa","Computador","'Produzindo protocolo de hoje.'"),mk("10:10","B2","Treino","V\u00eddeo sem fala + texto","Academia","Execu\u00e7\u00e3o","'Depois de 3h produ\u00e7\u00e3o, agora o corpo.'"),mk("12:00","B2","Corrida","V\u00eddeo falando","Ar livre","Suado","'4 dias de treino. O sono sustenta.'"),mk("09:30","B4","Enquete \u2014 h\u00e1bito","Foto + sticker","P\u00f3s-treino","\u2014","'\u00daltimo hor\u00e1rio de tela antes de dormir?'"),mk("12:30","B3","Almo\u00e7o","Foto + texto","Mesa","Prato forte","'Almo\u00e7o.'"),mk("13:10","B3","Nyx Project","Storyvlog","Mesa","Computador","'Deep work.'"),mk("13:30","B4","Resposta","Print + texto","\u2014","Print","Dado + contrapopular"),mk("14:30","B3","Posicionamento + antecipa\u00e7\u00e3o","V\u00eddeo falando","\u2014","\u2014","Posicionamento + 'hoje \u00e0 noite protocolo'"),mk("16:30","B3","Janta","Foto + texto","Mesa","Prato leve","'\u00daltima refei\u00e7\u00e3o. Leve.'"),mk("17:10","B3","Leitura 17h","Storyvlog","Ambiente calmo","Livro","'Primeiro passo do protocolo.'"),mk("18:30","B3","Faculdade + \u00f3culos","Foto + texto","Sala","\u00d3culos bloqueadores no rosto","'Zero luz azul a partir das 19h.'"),mk("19:15","B6","\u00d3culos + filtros luz","Foto + texto","Quarto/sala","\u00d3culos, luzes quentes","'19:15. Zero luz azul.'"),mk("19:45","B3","Di\u00e1rio","Foto + texto","Mesa","Di\u00e1rio","'Journaling.'"),mk("20:30","B6","PROTOCOLO COMPLETO","V\u00eddeo falando (25s)","Quarto, luz quente","Rosto calmo, 3s sil\u00eancio","Lista completa + 'Parece exagero? Eu durmo 8h.'"),mk("21:00","B6","Ch\u00e1 + banana + difusor","Foto + texto","Quarto","X\u00edcara, banana, difusor","'Triptofano + apigenina + lavanda.'"),mk("21:15","B6","Leitura noturna","Storyvlog","Quarto preparado","Livro, quarto gelado","'Leitura. O corpo sabe.'"),mk("21:50","B6","Celular fora + ru\u00eddo branco","Foto + texto","Quarto","Celular saindo, app ru\u00eddo","'Modo avi\u00e3o. Desconex\u00e3o total.'"),mk("22:00","B6","Banho quente + journaling","Foto + texto","Banheiro + mesa","Vapor, di\u00e1rio","'Banho + esvaziar cabe\u00e7a.'"),mk("22:10","B6","Blackout + protetor + 4-7-8","Foto + texto","Quarto escuro","Blackout, protetor, dilatador","'Escurid\u00e3o total. 4-7-8.'"),mk("22:50","B7","Ponto final","Tela preta + texto","\u2014","\u2014","'Protocolo completo. Ponto final.'")];
-DATA["Sexta"]=[mk("06:30","B1","S1 \u2014 Abertura","Foto + texto / Tela preta","Janela / quarto","Janela, cama, t\u00eanis","'Sexta. Mesmo hor\u00e1rio. O protocolo n\u00e3o tira folga.'"),mk("06:30","B1","S2 \u2014 Contexto","V\u00eddeo falando / Foto","\u2014","Rosto, \u00e1gua, espelho","'A tenta\u00e7\u00e3o de dormir tarde \u00e9 real. Mas a segunda cobra.'"),mk("06:30","B2","H\u00e1bito matinal 1","V\u00eddeo sem fala + texto","Banheiro / quarto","Chuveiro / sol / p\u00e9s","'Inclusive na sexta.'"),mk("06:35","B2","H\u00e1bito matinal 2","Foto + texto","Quarto / janela","\u00c1gua / celular longe","'5 dias no mesmo hor\u00e1rio.'"),mk("06:50","B2","Treino \u2014 indo","Foto + texto","Caminho","T\u00eanis","'5 dias seguidos.'"),mk("08:15","B2","Treino \u2014 p\u00f3s","V\u00eddeo falando","Academia","Rosto suado","'O fim de semana n\u00e3o \u00e9 pra destruir.'"),mk("08:45","B3","Faculdade","Foto + texto","Sala","Caderno","Contexto"),mk("09:00","B4","Caixinha \u2014 fim de semana","Foto + sticker","\u2014","\u2014","'O que muda na sua rotina no fim de semana?'"),mk("10:15","B3","Aula 2","Foto + texto","Sala","Material","Contexto"),mk("12:30","B3","Almo\u00e7o","Foto + texto","Mesa","Prato forte","'Almo\u00e7o.'"),mk("13:10","B3","Nyx Project","Storyvlog","Mesa","Computador","'\u00daltimo bloco da semana.'"),mk("13:30","B4","Resposta","Print + texto","\u2014","Print","Jetlag social / contrapopular"),mk("14:30","B3","Pausa","Foto + texto","Corredor","Respira\u00e7\u00e3o","'Pausa.'"),mk("15:00","B3","Rayhan + posicionamento","Storyvlog","Mesa","Computador","Produ\u00e7\u00e3o + posicionamento embutido"),mk("16:30","B3","Janta","Foto + texto","Mesa","Prato leve","'\u00daltima refei\u00e7\u00e3o.'"),mk("17:10","B3","Leitura 17h","Storyvlog","Ambiente calmo","Livro","'Desacelera\u00e7\u00e3o.'"),mk("18:00","B3","Faculdade noite","Foto + texto","Sala","\u00d3culos bloqueadores","'\u00daltima aula da semana.'"),mk("19:45","B3","Di\u00e1rio","Foto + texto","Mesa","Di\u00e1rio","'Journaling.'"),mk("20:30","B6","Banho quente + reflex\u00e3o","V\u00eddeo falando (calmo)","Banheiro","Vapor","'Sexta. Mesmo ritual.'"),mk("21:00","B6","Etapa protocolo","Foto + texto","Quarto","Ch\u00e1, difusor","'O protocolo n\u00e3o tira folga.'"),mk("21:30","B6","Leitura noturna","Storyvlog","Quarto","Livro","'Sexta. Mesmo ritual.'"),mk("22:10","B6","Etapa protocolo 2","Foto + texto","Quarto escuro","Blackout","'Escurid\u00e3o total.'"),mk("22:50","B7","Ponto final","Foto + texto","Quarto / celular modo avi\u00e3o","Modo avi\u00e3o, escurid\u00e3o","'O protocolo n\u00e3o tira folga. Ponto final.'")];
-DATA["S\u00e1bado"]=[mk("06:30","B1","S1 \u2014 Abertura","V\u00eddeo falando / Foto","Varanda / janela / rosto","Rosto, varanda, sol","'S\u00e1bado. A maioria vai acordar meio-dia. Eu j\u00e1 t\u00f4 de p\u00e9.'"),mk("06:30","B1","S2 \u2014 Contexto","Foto + texto / V\u00eddeo","\u2014","Ambiente calmo, cama, sol","'Descanso n\u00e3o \u00e9 dormir 12h.'"),mk("06:30","B2","H\u00e1bito matinal 1","V\u00eddeo sem fala + texto","Banheiro / quarto","Chuveiro / sol / grounding","'S\u00e1bado tamb\u00e9m.'"),mk("06:35","B2","H\u00e1bito matinal 2","Foto + texto","Quarto / varanda","\u00c1gua / alongamento / respira\u00e7\u00e3o","'Sem pressa.'"),mk("06:50","B2","Treino / atividade","V\u00eddeo sem fala + texto","Academia / ar livre","T\u00eanis, percurso","Treino ou movimento leve"),mk("07:30","B2","Corrida","V\u00eddeo sem fala + texto","Ar livre","Paisagem, rua vazia","'O estresse sai pelas pernas.'"),mk("09:30","B4","Caixinha \u2014 pessoal","Foto + sticker","Caf\u00e9, livro","\u2014","'Pergunte qualquer coisa menos sono.'"),mk("12:30","B3","Almo\u00e7o","Foto + texto","Mesa","Prato","'Almo\u00e7o.'"),mk("13:10","B3","Nyx Project","Storyvlog","Mesa","Computador","'Nyx no s\u00e1bado.'"),mk("13:30","B4","Resposta pessoal","Print + texto","\u2014","Print","Resposta leve, lado humano"),mk("14:30","B3","Reflex\u00e3o / Contrapopular","Tela preta + texto","\u2014","\u2014","'Sof\u00e1 + celular + s\u00e9rie n\u00e3o \u00e9 descanso. \u00c9 est\u00edmulo.'"),mk("16:30","B3","Janta","Foto + texto","Mesa","Prato leve","'\u00daltima refei\u00e7\u00e3o.'"),mk("17:30","B3","Rayhan + posicionamento","Storyvlog","Mesa","Computador","Produ\u00e7\u00e3o + posicionamento"),mk("19:00","B3","Vulnerabilidade","V\u00eddeo falando","\u2014","Rosto","'S\u00e1bado trabalhando. Cansativo. Mas \u00e9 o que constr\u00f3i.'"),mk("20:30","B6","Banho quente + reflex\u00e3o","V\u00eddeo falando (calmo)","Banheiro","Vapor","'O protocolo n\u00e3o \u00e9 lista. \u00c9 linguagem corporal.'"),mk("21:00","B6","Leitura noturna","Storyvlog","Quarto","Livro","'Sem pressa. Sem tela.'"),mk("22:00","B6","Etapa protocolo","Foto + texto","Quarto","Di\u00e1rio, ch\u00e1, difusor","Etapa do dia"),mk("22:50","B7","Ponto final","Foto escura + texto","Quarto escuro","Escurid\u00e3o","'S\u00e1bado. Mesmo ritual. Ponto final.'")];
-DATA["Domingo"]=[mk("06:30","B1","S1 \u2014 Abertura (foto calma)","Foto calma (fixo)","Janela luz suave / cama / varanda","Luz suave, cama arrumada, livro","'Domingo. O sono de hoje define a segunda.'"),mk("06:30","B1","S2 \u2014 Contexto","Foto + texto / V\u00eddeo falando","\u2014","\u00c1gua, sol, livro","'A semana que vem come\u00e7a hoje.'"),mk("06:30","B2","H\u00e1bito matinal 1","V\u00eddeo sem fala + texto","Banheiro / quarto","Chuveiro / sol / grounding","'7 dias. Semana completa.'"),mk("06:35","B2","H\u00e1bito matinal 2","Foto + texto","Quarto / varanda","\u00c1gua / respira\u00e7\u00e3o / celular longe","'O corpo n\u00e3o tira folga.'"),mk("07:00","B2","Leitura / caminhada","Foto + texto","Ambiente calmo / ar livre","Livro, paisagem","'Sem treino pesado. Descanso ativo.'"),mk("07:30","B2","Caminhada leve","V\u00eddeo sem fala + texto","Ar livre","Rua calma, paisagem","'Movimento leve.'"),mk("09:30","B4","Caixinha \u2014 pesquisa","Foto + sticker","Caderno, caf\u00e9","\u2014","'Qual tema querem que aprofunde?'"),mk("12:30","B3","Almo\u00e7o","Foto + texto","Mesa","Prato","'Almo\u00e7o de domingo.'"),mk("13:00","B3","Planejamento","Foto + texto","Mesa","Caderno planejamento","'Os stories da semana nascem aqui.'"),mk("13:30","B4","Resposta","Print + texto","\u2014","Print","Tema mais pedido + antecipa\u00e7\u00e3o"),mk("14:00","B3","Rayhan + posicionamento","Storyvlog","Mesa","Computador","Produ\u00e7\u00e3o + posicionamento"),mk("16:30","B3","Janta","Foto + texto","Mesa","Prato leve","'\u00daltima refei\u00e7\u00e3o.'"),mk("17:10","B3","Leitura / Rayhan","Storyvlog","Ambiente calmo / mesa","Livro ou computador","Leitura ou produ\u00e7\u00e3o"),mk("20:30","B6","Banho quente + reflex\u00e3o","V\u00eddeo falando (calmo)","Banheiro","Vapor","'O sono mais importante da semana \u00e9 o de hoje.'"),mk("21:00","B6","Ch\u00e1 + banana","Foto + texto","Quarto","X\u00edcara, banana","'Camomila. O sono define a segunda.'"),mk("21:30","B6","Leitura noturna","Storyvlog","Quarto","Livro","'\u00daltimo dia. Mesmo ritual.'"),mk("22:00","B6","Journaling","Foto + texto","Quarto","Di\u00e1rio","'Esvaziar cabe\u00e7a antes da segunda.'"),mk("22:50","B7","Ponto final","Tela preta + texto","\u2014","\u2014","'O sono de hoje define a segunda. Ponto final.'")];
 
-var ANGLES={"Segunda":"Peso + contraste com sono","Ter\u00e7a":"Consist\u00eancia silenciosa","Quarta":"Metade da semana \u00b7 Acumulado","Quinta":"DIA DO PROTOCOLO COMPLETO","Sexta":"O protocolo n\u00e3o tira folga","S\u00e1bado":"Mesmo hor\u00e1rio no fim de semana","Domingo":"Sono de hoje define a segunda"};
-var FIXED={"Segunda":"\ud83d\udd12 S1: V\u00eddeo falando","Quinta":"\ud83d\udd12 S2: Gancho protocolo","Domingo":"\ud83d\udd12 S1: Foto calma"};
+var DAYS=[“Segunda”,“Ter\u00e7a”,“Quarta”,“Quinta”,“Sexta”,“S\u00e1bado”,“Domingo”];
+var BLOCKS=[
+{id:“B1”,n:“ABERTURA”,c:”#e94560”,e:”\u25c9”},
+{id:“B2”,n:“ROTINA MATINAL”,c:”#0f3460”,e:”\u2600”},
+{id:“B3”,n:“PRODUTIVIDADE”,c:”#034078”,e:”\u26a1”},
+{id:“B4”,n:“CONVERSA”,c:”#e43f5a”,e:”\ud83d\udcac”},
+{id:“B5”,n:“POSICIONAMENTO”,c:”#c72c41”,e:”\ud83d\udccd”},
+{id:“B6”,n:“PROTOCOLO SONO”,c:”#6a0572”,e:”\u263d”},
+{id:“B7”,n:“FECHAMENTO”,c:”#950740”,e:”\u2b1b”}
+];
+var BM={};BLOCKS.forEach(function(b){BM[b.id]=b});
 
-var state={day:new Date().getDay()===0?6:new Date().getDay()-1,view:"daily",done:{},edits:{},open:{}};
+function mk(t,b,d,fo,ce,el,fa){return{t:t,b:b,d:d,fo:fo,ce:ce||””,el:el||””,fa:fa||””}}
 
-function e(s){return s?String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'):''}
+// TARDE SEG-SEX (igual pra todos)
+var TARDE_SEMANA=[
+mk(“12:30”,“B3”,“Almo\u00e7o”,“Foto + texto”,“Mesa”,“Prato forte”,”‘Refei\u00e7\u00e3o forte. Janta leve. Sono agradece.’”),
+mk(“13:10”,“B3”,“Nyx Project”,“Storyvlog”,“Mesa trabalho”,“Computador, fone”,”‘Deep work. 4h de foco > 10h de distra\u00e7\u00e3o.’”),
+mk(“13:30”,“B4”,“Resposta caixinha”,“Print + texto”,”\u2014”,“Print da resposta”,“Dar nome ao problema + solu\u00e7\u00e3o + CTA”),
+mk(“14:30”,“B3”,“Reflex\u00e3o / Contrapopular”,“Tela preta + texto”,”\u2014”,”\u2014”,“Contrapopular do banco (sono/estresse/produtividade)”),
+mk(“15:00”,“B5”,“Posicionamento”,“Embutido em outro story”,”\u2014”,”\u2014”,“Frase de posicionamento do \u00e2ngulo da semana”),
+mk(“15:30”,“B3”,“Pausa anti-estresse”,“Foto + texto”,“Corredor, ar livre”,“M\u00e3o no peito, passos”,”‘O estresse n\u00e3o acumula se voc\u00ea n\u00e3o deixa.’”),
+mk(“16:30”,“B3”,“Janta”,“Foto + texto”,“Mesa”,“Prato leve”,”’\u00daltima refei\u00e7\u00e3o. Depois: s\u00f3 banana e ch\u00e1.’”),
+mk(“17:10”,“B3”,“Leitura 17h”,“Storyvlog”,“Ambiente calmo”,“Livro aberto, luz tarde”,”‘Leitura. Desacelera\u00e7\u00e3o. Primeiro passo do protocolo.’”),
+mk(“18:30”,“B3”,“Aula”,“Foto + texto”,“Sala de aula”,“Caderno, \u00f3culos bloqueadores”,”‘Faculdade de \u00f3culos bloqueadores. Zero luz azul.’”),
+mk(“19:45”,“B3”,“Di\u00e1rio”,“Foto + texto”,“Mesa”,“Di\u00e1rio aberto, caneta”,”‘Journaling. Esvaziar a cabe\u00e7a.’”),
+mk(“20:30”,“B6”,“Banho quente + reflex\u00e3o”,“V\u00eddeo falando (calmo)”,“Banheiro, luz quente”,“Vapor, luz quente”,”‘A parte mais importante do dia: parar.’”),
+mk(“21:00”,“B6”,“Etapa protocolo”,“Foto + texto”,“Quarto preparado”,“Ch\u00e1, banana, difusor”,“Porqu\u00ea t\u00e9cnico: triptofano, apigenina, lavanda”),
+mk(“21:15”,“B6”,“Etapa protocolo 2”,“Foto + texto”,“Quarto escuro”,“Blackout, protetor, dilatador”,”‘Escurid\u00e3o total. Cada etapa \u00e9 um sinal pro c\u00e9rebro.’”),
+mk(“21:30”,“B6”,“Leitura noturna”,“Storyvlog”,“Quarto, luz m\u00ednima”,“Livro, luz quente”,”‘Leitura. Arco do livro: aberto de manh\u00e3, fechado de noite.’”),
+mk(“22:50”,“B7”,“Ponto final”,“Foto escura / tela preta”,“Quarto escuro”,“Escurid\u00e3o, celular modo avi\u00e3o”,”‘Ponto final.’”)
+];
 
-function R(){var a=document.getElementById('app');var h='<div class="hdr"><div class="logo">R</div><div><div class="tt">Rayhan Stories</div><div class="st">CONTROLE DE STORIES</div></div></div>';
-h+='<div class="nv"><button class="'+(state.view==='daily'?'ac':'in')+'" onclick="V(\'daily\')">\u25c9 Dia</button><button class="'+(state.view==='blocks'?'ac':'in')+'" onclick="V(\'blocks\')">\u25a6 Blocos</button></div>';
-if(state.view==='daily')h+=RD();else h+=RB();a.innerHTML=h}
+// TARDE SAB-DOM (sem aula, sem diário, com Rayhan)
+var TARDE_FDSEMANA=[
+mk(“12:30”,“B3”,“Almo\u00e7o”,“Foto + texto”,“Mesa”,“Prato”,”‘Almo\u00e7o.’”),
+mk(“13:10”,“B3”,“Nyx Project”,“Storyvlog”,“Mesa”,“Computador”,”‘Nyx no fim de semana.’”),
+mk(“13:30”,“B4”,“Resposta caixinha”,“Print + texto”,”\u2014”,“Print”,“Resposta”),
+mk(“14:30”,“B3”,“Reflex\u00e3o / Contrapopular”,“Tela preta + texto”,”\u2014”,”\u2014”,“Contrapopular”),
+mk(“15:30”,“B3”,“Pausa”,“Foto + texto”,“Corredor”,“Respira\u00e7\u00e3o”,”‘O estresse n\u00e3o acumula.’”),
+mk(“16:30”,“B3”,“Janta”,“Foto + texto”,“Mesa”,“Prato leve”,”’\u00daltima refei\u00e7\u00e3o.’”),
+mk(“17:10”,“B3”,“Leitura”,“Storyvlog”,“Ambiente calmo”,“Livro”,”‘Desacelera\u00e7\u00e3o.’”),
+mk(“17:30”,“B3”,“Rayhan”,“Storyvlog”,“Mesa”,“Computador”,“Produ\u00e7\u00e3o de conte\u00fado + posicionamento”),
+mk(“19:00”,“B3”,“Vulnerabilidade”,“V\u00eddeo falando”,”\u2014”,“Rosto”,“Vulnerabilidade pontual do dia”),
+mk(“20:30”,“B6”,“Banho quente + reflex\u00e3o”,“V\u00eddeo falando (calmo)”,“Banheiro, luz quente”,“Vapor”,”‘A parte mais importante: parar.’”),
+mk(“21:00”,“B6”,“Etapa protocolo”,“Foto + texto”,“Quarto”,“Ch\u00e1, difusor”,“Porqu\u00ea t\u00e9cnico”),
+mk(“21:30”,“B6”,“Leitura noturna”,“Storyvlog”,“Quarto”,“Livro”,”‘Arco do livro.’”),
+mk(“22:00”,“B6”,“Etapa protocolo 2”,“Foto + texto”,“Quarto escuro”,“Blackout, protetor”,”‘Escurid\u00e3o total.’”),
+mk(“22:50”,“B7”,“Ponto final”,“Foto escura + texto”,“Quarto escuro”,“Escurid\u00e3o”,”‘Ponto final.’”)
+];
 
-function RD(){var day=DAYS[state.day];var ss=DATA[day]||[];var t=ss.length;var dc=0;ss.forEach(function(_,i){if(state.done[state.day+'-'+i])dc++});var p=t?Math.round(dc/t*100):0;
-var h='<div class="ds">';DAYS.forEach(function(d,i){h+='<button class="'+(state.day===i?'ac':'in')+'" onclick="D('+i+')">'+d.slice(0,3)+'</button>'});h+='</div>';
-h+='<div class="dh"><div style="display:flex;justify-content:space-between;align-items:flex-start"><div><div class="dt">'+day+'</div><div class="da">\u25c8 '+ANGLES[day]+'</div>';
-if(FIXED[day])h+='<div class="df">'+FIXED[day]+'</div>';
-h+='</div><span style="color:'+(dc===t?'#2a7a2a':'#e94560')+';font-size:12px;font-family:monospace;font-weight:800">'+dc+'/'+t+'</span></div>';
-h+='<div class="pb"><div class="pi" style="width:'+p+'%;background:'+(dc===t?'#2a7a2a':'#e94560')+'"></div></div></div>';
-ss.forEach(function(s,i){var k=state.day+'-'+i;var dn=state.done[k];var ed=state.edits[k]||{};var bl=BM[s.b];var op=state.open[k];
-var fo=ed.fo!==undefined?ed.fo:s.fo;var ce=ed.ce!==undefined?ed.ce:s.ce;var el=ed.el!==undefined?ed.el:s.el;var fa=ed.fa!==undefined?ed.fa:s.fa;
-h+='<div class="cd'+(dn?' dn':'')+'" style="border-left-color:'+bl.c+'"><div class="ci">';
-h+='<button class="ck'+(dn?' dn':'')+'" style="border-color:'+(dn?'#2a7a2a':bl.c)+'" onclick="T(\''+k+'\')">'+(dn?'\u2713':'')+'</button>';
-h+='<div style="flex:1;min-width:0"><div style="display:flex;justify-content:space-between;align-items:center"><span class="cb" style="color:'+bl.c+'">'+bl.e+' '+bl.n+'</span><span class="ct">'+s.t+'</span></div>';
-h+='<p class="cn '+(dn?'dn':'ac')+'">'+e(s.d)+'</p>';
-h+='<div class="mg"><div><div class="ml">FORMATO</div><p class="mv '+(dn?'dn':'ac')+'">'+e(fo)+'</p></div>';
-h+='<div><div class="ml">CEN\u00c1RIO</div><p class="mv '+(dn?'dn':'ac')+'">'+e(ce)+'</p></div>';
-h+='<div><div class="ml">ELEMENTOS</div><p class="mv '+(dn?'dn':'ac')+'">'+e(el)+'</p></div>';
-h+='<div class="mf"><div class="ml">FALA / TEXTO</div><p class="mv '+(dn?'dn':'ac')+'">'+e(fa)+'</p></div></div>';
-h+='<button class="eb" style="color:'+(op?bl.c:'#3a3a50')+'" onclick="O(\''+k+'\')">'+(op?'\u25be Fechar edi\u00e7\u00e3o':'\u270e Editar')+'</button>';
-if(op){h+='<div class="ef">';
-[{l:'FORMATO',f:'fo'},{l:'CEN\u00c1RIO',f:'ce'},{l:'ELEMENTOS',f:'el'},{l:'FALA / TEXTO',f:'fa'}].forEach(function(x){
-var v=x.f==='fo'?fo:x.f==='ce'?ce:x.f==='el'?el:fa;
-h+='<div><div class="ml">'+x.l+'</div><textarea rows="'+(x.f==='fa'?2:1)+'" onchange="E(\''+k+'\',\''+x.f+'\',this.value)">'+e(v)+'</textarea></div>'});
-h+='</div>'}
-h+='</div></div></div>'});
-h+='<div style="height:80px"></div>';return h}
+// MANHÃS (diferentes por dia)
+var MANHA={};
+MANHA[“Segunda”]=[
+mk(“06:30”,“B1”,“S1 \u2014 Abertura”,“V\u00eddeo falando (fixo)”,“Quarto, luz baixa”,“Rosto rec\u00e9m-acordado”,“Agenda do dia + ‘O dia come\u00e7ou ontem.’”),
+mk(“06:30”,“B1”,“S2 \u2014 Contexto do dia”,“Foto + texto”,”\u2014”,“T\u00eanis / cama arrumada / celular”,”‘Tudo cabe num dia. Se voc\u00ea dormiu.’”),
+mk(“06:30”,“B2”,“H\u00e1bito matinal 1”,“V\u00eddeo sem fala + texto”,“Banheiro / quarto”,“Chuveiro / p\u00e9s no ch\u00e3o / sol”,“Bord\u00e3o: ‘Primeiro choque do dia.’”),
+mk(“06:35”,“B2”,“H\u00e1bito matinal 2”,“Foto + texto”,“Quarto / janela”,“Copo d’\u00e1gua / celular longe”,“Porqu\u00ea t\u00e9cnico ou consist\u00eancia”),
+mk(“06:50”,“B2”,“Treino \u2014 indo”,“Foto + texto”,“Caminho academia”,“T\u00eanis, mochila”,”‘06:45. Treino. Segunda come\u00e7ou.’”),
+mk(“08:15”,“B2”,“Treino \u2014 p\u00f3s”,“V\u00eddeo falando”,“Academia”,“Rosto suado”,“Conex\u00e3o treino\u2192sono”),
+mk(“08:45”,“B3”,“Aula”,“Foto + texto”,“Sala de aula”,“Caderno, caneta”,“Contexto ou aprendizado”),
+mk(“09:30”,“B4”,“Enquete ou Caixinha”,“Foto + sticker”,“Foto do momento”,“Mesa, caf\u00e9”,“Pergunta: dor ou comportamento”),
+mk(“10:10”,“B2”,“Rayhan”,“Storyvlog”,“Mesa, computador”,“Tela, caderno, fone”,”‘O que voc\u00eas veem sai daqui.’”)
+];
+MANHA[“Ter\u00e7a”]=[
+mk(“06:30”,“B1”,“S1 \u2014 Abertura”,“Foto + texto”,“Janela / quarto”,“Janela, p\u00e9s cama”,”‘Ter\u00e7a. Mesmo hor\u00e1rio. O dia come\u00e7ou ontem.’”),
+mk(“06:30”,“B1”,“S2 \u2014 Contexto”,“Foto + texto”,”\u2014”,“Copo d’\u00e1gua”,”‘Dormiu bem, acordou bem.’”),
+mk(“06:30”,“B2”,“H\u00e1bito matinal 1”,“V\u00eddeo sem fala + texto”,“Banheiro”,“Chuveiro / sol”,“Bord\u00e3o ou porqu\u00ea t\u00e9cnico”),
+mk(“06:35”,“B2”,“H\u00e1bito matinal 2”,“Foto + texto”,“Quarto”,”\u00c1gua / celular longe”,“Porqu\u00ea t\u00e9cnico”),
+mk(“06:50”,“B2”,“Rayhan”,“Storyvlog”,“Mesa”,“Tela, caderno”,”‘Produ\u00e7\u00e3o antes do treino.’”),
+mk(“10:10”,“B2”,“Treino”,“Foto + texto”,“Caminho”,“T\u00eanis”,”‘3h de produ\u00e7\u00e3o. Agora o corpo.’”),
+mk(“09:30”,“B4”,“Caixinha”,“Foto + sticker”,“Mesa”,“Caf\u00e9”,”‘O que te impede de dormir?’”),
+mk(“11:30”,“B2”,“Corrida”,“V\u00eddeo sem fala”,“Ar livre”,“P\u00e9s, percurso”,”‘O estresse sai pelas pernas.’”)
+];
+MANHA[“Quarta”]=[
+mk(“06:30”,“B1”,“S1 \u2014 Abertura”,“Foto + texto”,“Janela”,“Janela, livro”,”‘Metade da semana. O dia come\u00e7ou ontem.’”),
+mk(“06:30”,“B1”,“S2 \u2014 Contexto”,“V\u00eddeo falando”,”\u2014”,“Rosto”,”‘O acumulado aparece.’”),
+mk(“06:30”,“B2”,“H\u00e1bito matinal 1”,“V\u00eddeo sem fala”,“Banheiro”,“Chuveiro / sol”,“Bord\u00e3o”),
+mk(“06:50”,“B2”,“Rayhan (curto)”,“Storyvlog”,“Mesa”,“Computador”,”‘45 min. Depois: treino.’”),
+mk(“07:35”,“B2”,“H\u00e1bito matinal 2”,“Foto + texto”,“Quarto”,”\u00c1gua / alongamento”,”‘Antes do treino.’”),
+mk(“07:50”,“B2”,“Treino”,“V\u00eddeo sem fala”,“Academia”,“Execu\u00e7\u00e3o”,”‘Terceiro dia seguido.’”),
+mk(“09:30”,“B2”,“Corrida”,“V\u00eddeo sem fala”,“Ar livre”,“Percurso”,”‘O estresse sai pelas pernas.’”),
+mk(“10:15”,“B3”,“Aula”,“Foto + texto”,“Sala”,“Caderno”,“Contexto”),
+mk(“11:00”,“B4”,“Caixinha”,“Foto + sticker”,“Caf\u00e9”,“Mesa”,”‘Trabalhar mais = produzir mais?’”)
+];
+MANHA[“Quinta”]=[
+mk(“06:30”,“B1”,“S1 \u2014 Abertura”,“V\u00eddeo falando”,“Quarto”,“Rosto, objetos protocolo”,”‘Dormi 22:30, sem despertador.’”),
+mk(“06:30”,“B1”,“S2 \u2014 Gancho protocolo”,“V\u00eddeo falando”,”\u2014”,“Rosto, objetos cabeceira”,”‘Hoje: protocolo completo. Fica at\u00e9 o final.’”),
+mk(“06:30”,“B2”,“H\u00e1bito matinal 1”,“V\u00eddeo sem fala”,“Banheiro”,“Chuveiro / sol”,“Bord\u00e3o”),
+mk(“06:35”,“B2”,“H\u00e1bito matinal 2”,“Foto + texto”,“Quarto”,”\u00c1gua / celular longe”,“Porqu\u00ea t\u00e9cnico”),
+mk(“06:50”,“B2”,“Rayhan”,“Storyvlog”,“Mesa”,“Computador”,”‘Produzindo protocolo.’”),
+mk(“09:30”,“B4”,“Enquete”,“Foto + sticker”,“P\u00f3s-treino”,”\u2014”,”’\u00daltimo hor\u00e1rio de tela?’”),
+mk(“10:10”,“B2”,“Treino”,“V\u00eddeo sem fala”,“Academia”,“Execu\u00e7\u00e3o”,”‘Agora o corpo.’”),
+mk(“11:30”,“B2”,“Corrida”,“V\u00eddeo falando”,“Ar livre”,“Suado”,”‘4 dias. O sono sustenta.’”)
+];
+MANHA[“Sexta”]=[
+mk(“06:30”,“B1”,“S1 \u2014 Abertura”,“Foto + texto”,“Janela”,“Janela, t\u00eanis”,”‘Sexta. O protocolo n\u00e3o tira folga.’”),
+mk(“06:30”,“B1”,“S2 \u2014 Contexto”,“V\u00eddeo falando”,”\u2014”,“Rosto, \u00e1gua”,”‘A tenta\u00e7\u00e3o \u00e9 real. Mas a segunda cobra.’”),
+mk(“06:30”,“B2”,“H\u00e1bito matinal 1”,“V\u00eddeo sem fala”,“Banheiro”,“Chuveiro / sol”,”‘Inclusive na sexta.’”),
+mk(“06:35”,“B2”,“H\u00e1bito matinal 2”,“Foto + texto”,“Quarto”,”\u00c1gua / celular longe”,”‘5 dias no mesmo hor\u00e1rio.’”),
+mk(“06:50”,“B2”,“Treino”,“Foto + texto”,“Caminho”,“T\u00eanis”,”‘5 dias seguidos.’”),
+mk(“08:15”,“B2”,“Treino p\u00f3s”,“V\u00eddeo falando”,“Academia”,“Rosto suado”,”‘N\u00e3o \u00e9 pra destruir.’”),
+mk(“08:45”,“B3”,“Aula”,“Foto + texto”,“Sala”,“Caderno”,“Contexto”),
+mk(“09:00”,“B4”,“Caixinha”,“Foto + sticker”,”\u2014”,”\u2014”,”‘O que muda no fim de semana?’”),
+mk(“10:15”,“B3”,“Aula 2”,“Foto + texto”,“Sala”,“Material”,“Contexto”)
+];
+MANHA[“S\u00e1bado”]=[
+mk(“06:30”,“B1”,“S1 \u2014 Abertura”,“V\u00eddeo falando”,“Varanda”,“Rosto, sol”,”‘S\u00e1bado. A maioria vai acordar meio-dia.’”),
+mk(“06:30”,“B1”,“S2 \u2014 Contexto”,“Foto + texto”,”\u2014”,“Ambiente calmo”,”‘Descanso n\u00e3o \u00e9 dormir 12h.’”),
+mk(“06:30”,“B2”,“H\u00e1bito matinal 1”,“V\u00eddeo sem fala”,“Banheiro”,“Chuveiro / sol”,”‘S\u00e1bado tamb\u00e9m.’”),
+mk(“06:35”,“B2”,“H\u00e1bito matinal 2”,“Foto + texto”,“Varanda”,”\u00c1gua / alongamento”,”‘Sem pressa.’”),
+mk(“06:50”,“B2”,“Treino”,“V\u00eddeo sem fala”,“Ar livre”,“T\u00eanis”,“Treino ou movimento”),
+mk(“07:30”,“B2”,“Corrida”,“V\u00eddeo sem fala”,“Ar livre”,“Paisagem, rua vazia”,”‘O estresse sai pelas pernas.’”),
+mk(“09:30”,“B4”,“Caixinha pessoal”,“Foto + sticker”,“Caf\u00e9”,”\u2014”,”‘Pergunte qualquer coisa menos sono.’”)
+];
+MANHA[“Domingo”]=[
+mk(“06:30”,“B1”,“S1 \u2014 Abertura”,“Foto calma (fixo)”,“Janela luz suave”,“Luz suave, livro”,”‘O sono de hoje define a segunda.’”),
+mk(“06:30”,“B1”,“S2 \u2014 Contexto”,“Foto + texto”,”\u2014”,”\u00c1gua, sol, livro”,”‘A semana come\u00e7a hoje.’”),
+mk(“06:30”,“B2”,“H\u00e1bito matinal 1”,“V\u00eddeo sem fala”,“Banheiro”,“Chuveiro / sol”,”‘7 dias. Semana completa.’”),
+mk(“06:35”,“B2”,“H\u00e1bito matinal 2”,“Foto + texto”,“Varanda”,”\u00c1gua / respira\u00e7\u00e3o”,”‘O corpo n\u00e3o tira folga.’”),
+mk(“07:00”,“B2”,“Leitura / caminhada”,“Foto + texto”,“Ar livre”,“Livro, paisagem”,”‘Descanso ativo.’”),
+mk(“07:30”,“B2”,“Caminhada leve”,“V\u00eddeo sem fala”,“Ar livre”,“Rua calma”,”‘Movimento leve.’”),
+mk(“09:30”,“B4”,“Caixinha pesquisa”,“Foto + sticker”,“Caderno”,”\u2014”,”‘Qual tema querem?’”)
+];
 
-function RB(){var h='<div class="bl"><h2 style="font-size:15px;font-family:\'Space Mono\',monospace;margin-bottom:10px">7 Blocos</h2>';
-Object.keys(BM).forEach(function(id){var b=BM[id];var c=0;DAYS.forEach(function(d){(DATA[d]||[]).forEach(function(s){if(s.b===id)c++})});
-h+='<button class="bb" style="border:1px solid '+b.c+'22;border-left:3px solid '+b.c+'" onclick="OB(\''+id+'\')">';
-h+='<span class="be">'+b.e+'</span><div style="flex:1"><div class="bn">'+b.n+'</div><div class="bc">'+c+' stories/semana</div></div><span style="color:#222;font-size:14px">\u2192</span></button>'});
-h+='</div>';return h}
+// Montar DATA completa: manhã + tarde
+var DEFAULT_DATA={};
+DAYS.forEach(function(day){
+var m=MANHA[day]||[];
+var isFds=(day===“S\u00e1bado”||day===“Domingo”);
+var t=isFds?TARDE_FDSEMANA:TARDE_SEMANA;
+DEFAULT_DATA[day]=m.concat(t.map(function(s){return JSON.parse(JSON.stringify(s))}));
+});
 
-window.V=function(v){state.view=v;R()};
-window.D=function(d){state.day=d;R()};
-window.T=function(k){state.done[k]=!state.done[k];R()};
-window.O=function(k){state.open[k]=!state.open[k];R()};
-window.E=function(k,f,v){if(!state.edits[k])state.edits[k]={};state.edits[k][f]=v};
-window.OB=function(id){var b=BM[id];var h='<div class="hdr"><div class="logo">R</div><div><div class="tt">Rayhan Stories</div><div class="st">CONTROLE DE STORIES</div></div></div>';
-h+='<div class="nv"><button class="in" onclick="V(\'daily\')">\u25c9 Dia</button><button class="ac" onclick="V(\'blocks\')">\u25a6 Blocos</button></div>';
-h+='<div style="padding:10px;padding-bottom:80px">';
-h+='<button style="background:none;border:1px solid #1a1a2e;color:#555;border-radius:6px;padding:5px 12px;font-size:10px;font-family:monospace;margin-bottom:10px" onclick="V(\'blocks\')">\u2190 Voltar</button>';
-h+='<div style="background:#09090f;border:1px solid '+b.c+'33;border-left:4px solid '+b.c+';border-radius:10px;padding:14px;margin-bottom:12px"><span style="font-size:18px">'+b.e+'</span><h2 style="color:#fff;font-size:17px;margin:4px 0 0;font-family:\'Space Mono\',monospace">'+b.n+'</h2></div>';
-DAYS.forEach(function(day){var items=(DATA[day]||[]).filter(function(s){return s.b===id});if(!items.length)return;
-h+='<div style="margin-bottom:12px"><h3 style="color:'+b.c+';font-size:10px;font-family:monospace;font-weight:800;letter-spacing:1.5px;margin-bottom:5px">'+day.toUpperCase()+'</h3>';
-items.forEach(function(s){h+='<div style="background:#09090f;border:1px solid #141425;border-radius:7px;padding:8px 10px;margin-bottom:3px">';
-h+='<div style="display:flex;justify-content:space-between;margin-bottom:3px"><span style="color:#ccc;font-size:11px;font-weight:600">'+e(s.d)+'</span><span style="color:#2a2a3a;font-size:9px;font-family:monospace">'+s.t+'</span></div>';
-h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:2px 6px"><span style="color:#555;font-size:9px;font-family:monospace">\ud83d\udcf7 '+e(s.fo)+'</span><span style="color:#555;font-size:9px;font-family:monospace">\ud83d\udccd '+e(s.ce)+'</span><span style="color:#555;font-size:9px;font-family:monospace">\u2726 '+e(s.el)+'</span></div>';
-h+='<p style="color:#777;font-size:9px;font-family:monospace;font-style:italic;margin:3px 0 0">'+e(s.fa)+'</p></div>'});h+='</div>'});
-h+='</div>';document.getElementById('app').innerHTML=h};
+var ANGLES={“Segunda”:“Peso + contraste com sono”,“Ter\u00e7a”:“Consist\u00eancia silenciosa”,“Quarta”:“Metade da semana \u00b7 Acumulado”,“Quinta”:“DIA DO PROTOCOLO COMPLETO”,“Sexta”:“O protocolo n\u00e3o tira folga”,“S\u00e1bado”:“Mesmo hor\u00e1rio no fim de semana”,“Domingo”:“Sono de hoje define a segunda”};
+
+var saved=null;
+try{saved=JSON.parse(localStorage.getItem(‘rayhan_v2’))}catch(x){}
+var data=saved||JSON.parse(JSON.stringify(DEFAULT_DATA));
+var st={day:new Date().getDay()===0?6:new Date().getDay()-1,view:“daily”,done:{}};
+try{var sd=JSON.parse(localStorage.getItem(‘rayhan_done_v2’));if(sd)st.done=sd}catch(x){}
+
+function save(){localStorage.setItem(‘rayhan_v2’,JSON.stringify(data));localStorage.setItem(‘rayhan_done_v2’,JSON.stringify(st.done))}
+function esc(s){return s?String(s).replace(/&/g,’&’).replace(/</g,’<’).replace(/>/g,’>’).replace(/”/g,’"’).replace(/’/g,’'’):’’}
+
+function R(){
+var a=document.getElementById(‘app’);var h=’’;
+h+=’<div style="padding:14px 10px 4px;display:flex;align-items:center;gap:8px"><div style="width:28px;height:28px;background:#e94560;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;color:#fff;font-family:monospace">R</div><div><div style="font-size:14px;font-family:\'Space Mono\',monospace;font-weight:800;color:#fff">Rayhan Stories</div><div style="color:#2a2a2a;font-size:8px;font-family:monospace;letter-spacing:2px">CONTROLE DE STORIES</div></div></div>’;
+h+=’<div style="display:flex;gap:4px;padding:6px 10px;position:sticky;top:0;background:#050508;z-index:50">’;
+h+=’<button style="flex:1;padding:9px;border-radius:7px;font-size:11px;font-weight:700;background:'+(st.view==='daily'?'#e94560':'#0c0c18')+';color:'+(st.view==='daily'?'#fff':'#3a3a3a')+'" onclick="SV(\'daily\')">\u25c9 Dia</button>’;
+h+=’<button style="flex:1;padding:9px;border-radius:7px;font-size:11px;font-weight:700;background:'+(st.view==='blocks'?'#e94560':'#0c0c18')+';color:'+(st.view==='blocks'?'#fff':'#3a3a3a')+'" onclick="SV(\'blocks\')">\u25a6 Blocos</button>’;
+h+=’</div>’;
+if(st.view===‘daily’)h+=RD();else h+=RBL();
+a.innerHTML=h}
+
+function RD(){
+var day=DAYS[st.day];var ss=data[day]||[];var t=ss.length;var dc=0;
+ss.forEach(function(_,i){if(st.done[st.day+’-’+i])dc++});
+var p=t?Math.round(dc/t*100):0;
+var h=’<div style="display:flex;gap:3px;padding:8px 10px;overflow-x:auto">’;
+DAYS.forEach(function(d,i){h+=’<button style="flex:0 0 auto;padding:6px 12px;border-radius:14px;font-size:11px;font-weight:700;background:'+(st.day===i?'#e94560':'#0c0c18')+';color:'+(st.day===i?'#fff':'#3a3a3a')+'" onclick="SD('+i+')">’+d.slice(0,3)+’</button>’});
+h+=’</div>’;
+h+=’<div style="margin:2px 10px 6px;background:#09090f;border:1px solid #141425;border-radius:10px;padding:12px"><div style="display:flex;justify-content:space-between;align-items:flex-start"><div>’;
+h+=’<div style="font-size:17px;font-family:\'Space Mono\',monospace;font-weight:800;color:#fff">’+day+’</div>’;
+h+=’<div style="color:#e94560;font-size:10px;font-family:monospace;font-weight:700;margin-top:3px">\u25c8 ‘+ANGLES[day]+’</div>’;
+h+=’</div><span style="color:'+(dc===t?'#2a7a2a':'#e94560')+';font-size:12px;font-family:monospace;font-weight:800">’+dc+’/’+t+’</span></div>’;
+h+=’<div style="margin-top:8px;height:3px;background:#0c0c0c;border-radius:2px;overflow:hidden"><div style="height:100%;border-radius:2px;transition:width .3s;width:'+p+'%;background:'+(dc===t?'#2a7a2a':'#e94560')+'"></div></div></div>’;
+
+ss.forEach(function(s,i){
+var k=st.day+’-’+i;var dn=st.done[k];var bl=BM[s.b]||BM.B3;
+h+=’<div style="background:'+(dn?'#060d06':'#09090f')+';border:1px solid '+(dn?'#1a3a1a':'#141425')+';border-left:3px solid '+bl.c+';border-radius:10px;margin:0 10px 6px;opacity:'+(dn?'0.45':'1')+';transition:all .15s">’;
+h+=’<div style="padding:10px 12px;display:flex;gap:10px;align-items:flex-start">’;
+h+=’<button style="width:18px;height:18px;border-radius:50%;flex-shrink:0;margin-top:1px;border:2px solid '+(dn?'#2a7a2a':bl.c)+';background:'+(dn?'#2a7a2a':'transparent')+';color:#fff;font-size:9px;display:flex;align-items:center;justify-content:center" onclick="TG('+i+')">’+(dn?’\u2713’:’’)+’</button>’;
+h+=’<div style="flex:1;min-width:0">’;
+h+=’<div style="display:flex;justify-content:space-between;align-items:center">’;
+h+=’<span style="color:'+bl.c+';font-size:8px;font-weight:800;letter-spacing:1.5px;font-family:monospace">’+bl.e+’ ‘+bl.n+’</span>’;
+h+=’<span style="color:#e94560;font-size:12px;font-family:monospace;font-weight:800">’+esc(s.t)+’</span>’;
+h+=’</div>’;
+h+=’<p style="color:'+(dn?'#333':'#e8e8f0')+';font-size:13px;font-weight:600;line-height:1.3;margin:3px 0 0;text-decoration:'+(dn?'line-through':'none')+'">’+esc(s.d)+’</p>’;
+h+=’<div style="margin-top:8px;display:grid;grid-template-columns:1fr 1fr;gap:4px 8px">’;
+h+=’<div><div style="color:#3a3a50;font-size:8px;font-weight:700;letter-spacing:1px;font-family:monospace">FORMATO</div><p style="color:'+(dn?'#2a2a2a':'#8888aa')+';font-size:11px;line-height:1.3;margin:1px 0 0">’+esc(s.fo)+’</p></div>’;
+h+=’<div><div style="color:#3a3a50;font-size:8px;font-weight:700;letter-spacing:1px;font-family:monospace">CEN\u00c1RIO</div><p style="color:'+(dn?'#2a2a2a':'#8888aa')+';font-size:11px;line-height:1.3;margin:1px 0 0">’+esc(s.ce)+’</p></div>’;
+h+=’<div><div style="color:#3a3a50;font-size:8px;font-weight:700;letter-spacing:1px;font-family:monospace">ELEMENTOS</div><p style="color:'+(dn?'#2a2a2a':'#8888aa')+';font-size:11px;line-height:1.3;margin:1px 0 0">’+esc(s.el)+’</p></div>’;
+h+=’<div style="grid-column:1/3"><div style="color:#3a3a50;font-size:8px;font-weight:700;letter-spacing:1px;font-family:monospace">FALA / TEXTO</div><p style="color:'+(dn?'#2a2a2a':'#c0c0d8')+';font-size:11px;line-height:1.4;margin:1px 0 0;font-style:italic">’+esc(s.fa)+’</p></div>’;
+h+=’</div>’;
+h+=’<div style="margin-top:8px;display:flex;gap:6px">’;
+h+=’<button style="background:#0c0c18;border:1px solid #1a1a2e;color:#888;border-radius:5px;padding:3px 8px;font-size:9px;font-weight:700;font-family:monospace" onclick="ED('+i+')">\u270e Editar</button>’;
+h+=’<button style="background:#1a0a0a;border:1px solid #3a1a1a;color:#e94560;border-radius:5px;padding:3px 8px;font-size:9px;font-weight:700;font-family:monospace" onclick="DEL('+i+')">\u2715 Remover</button>’;
+h+=’</div></div></div></div>’;
+});
+h+=’<button style="display:flex;align-items:center;justify-content:center;gap:6px;width:calc(100% - 20px);margin:8px 10px;padding:12px;background:#0c0c18;border:1px dashed #1a1a2e;border-radius:10px;color:#3a3a50;font-size:11px;font-weight:700;font-family:monospace" onclick="ADD()">+ Adicionar story</button>’;
+h+=’<div style="height:60px"></div>’;
+return h}
+
+function RBL(){
+var h=’<div style="padding:10px;padding-bottom:80px"><h2 style="font-size:15px;font-family:\'Space Mono\',monospace;margin-bottom:10px;color:#fff">7 Blocos</h2>’;
+BLOCKS.forEach(function(b){
+var c=0;DAYS.forEach(function(d){(data[d]||[]).forEach(function(s){if(s.b===b.id)c++})});
+h+=’<button style="width:100%;display:flex;align-items:center;gap:10px;background:#09090f;border:1px solid '+b.c+'22;border-left:3px solid '+b.c+';border-radius:8px;padding:12px;margin-bottom:5px;text-align:left;cursor:pointer" onclick="OB(\''+b.id+'\')">’;
+h+=’<span style="font-size:18px">’+b.e+’</span><div style="flex:1"><div style="font-size:13px;font-family:\'Space Mono\',monospace;color:#fff">’+b.n+’</div><div style="color:#666;font-size:9px;font-family:monospace">’+c+’ stories/semana</div></div><span style="color:#444;font-size:14px">\u2192</span></button>’});
+h+=’</div>’;return h}
+
+function showModal(title,fields,onSave){
+var bg=document.createElement(‘div’);bg.id=‘modal-bg’;
+bg.style.cssText=‘position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.85);z-index:200;display:flex;align-items:center;justify-content:center;padding:16px’;
+var m=’<div style="background:#09090f;border:1px solid #1a1a2e;border-radius:12px;padding:20px;width:100%;max-width:460px;max-height:90vh;overflow-y:auto"><h3 style="font-size:14px;font-family:\'Space Mono\',monospace;margin-bottom:14px;color:#fff">’+title+’</h3>’;
+fields.forEach(function(f){
+m+=’<div style="margin:10px 0 3px;color:#888;font-size:9px;font-weight:700;letter-spacing:1px;font-family:monospace">’+f.label+’</div>’;
+if(f.type===‘select’){
+m+=’<select id="modal-'+f.id+'" style="width:100%;background:#06060c;border:1px solid #1a1a2e;color:#aaa;border-radius:5px;padding:6px 8px;font-size:11px;font-family:monospace">’;
+f.options.forEach(function(o){m+=’<option value=”’+esc(o.v)+’”’+(o.v===f.val?’ selected’:’’)+’>’+esc(o.l)+’</option>’});
+m+=’</select>’;
+}else if(f.type===‘textarea’){
+m+=’<textarea id="modal-'+f.id+'" rows="2" style="width:100%;background:#06060c;border:1px solid #1a1a2e;color:#aaa;border-radius:5px;padding:6px 8px;font-size:11px;font-family:monospace;resize:vertical;box-sizing:border-box">’+esc(f.val)+’</textarea>’;
+}else{
+m+=’<input type="text" id="modal-'+f.id+'" value="'+esc(f.val)+'" style="width:100%;background:#06060c;border:1px solid #1a1a2e;color:#aaa;border-radius:5px;padding:6px 8px;font-size:11px;font-family:monospace;box-sizing:border-box">’;
+}});
+m+=’<div style="display:flex;gap:8px;margin-top:16px"><button style="flex:1;padding:10px;border-radius:7px;font-size:11px;font-weight:700;background:#1a1a2e;color:#888;font-family:monospace;cursor:pointer;border:none" onclick="closeModal()">Cancelar</button><button style="flex:1;padding:10px;border-radius:7px;font-size:11px;font-weight:700;background:#e94560;color:#fff;font-family:monospace;cursor:pointer;border:none" onclick="saveModal()">Salvar</button></div></div>’;
+bg.innerHTML=m;document.body.appendChild(bg);
+window._modalSave=onSave;window._modalFields=fields}
+
+window.closeModal=function(){var m=document.getElementById(‘modal-bg’);if(m)m.remove()};
+window.saveModal=function(){var v={};window._modalFields.forEach(function(f){var el=document.getElementById(‘modal-’+f.id);if(el)v[f.id]=el.value});if(window._modalSave)window._modalSave(v);closeModal()};
+
+window.SV=function(v){st.view=v;R()};
+window.SD=function(d){st.day=d;R()};
+window.TG=function(i){var k=st.day+’-’+i;st.done[k]=!st.done[k];save();R()};
+
+window.ED=function(i){
+var day=DAYS[st.day];var s=data[day][i];
+var bo=BLOCKS.map(function(b){return{v:b.id,l:b.e+’ ’+b.n}});
+showModal(‘Editar Story’,[
+{id:‘t’,label:‘HOR\u00c1RIO’,type:‘text’,val:s.t},
+{id:‘b’,label:‘BLOCO’,type:‘select’,val:s.b,options:bo},
+{id:‘d’,label:‘DESCRI\u00c7\u00c3O’,type:‘text’,val:s.d},
+{id:‘fo’,label:‘FORMATO’,type:‘text’,val:s.fo},
+{id:‘ce’,label:‘CEN\u00c1RIO’,type:‘text’,val:s.ce},
+{id:‘el’,label:‘ELEMENTOS’,type:‘text’,val:s.el},
+{id:‘fa’,label:‘FALA / TEXTO’,type:‘textarea’,val:s.fa}
+],function(v){data[day][i]={t:v.t,b:v.b,d:v.d,fo:v.fo,ce:v.ce,el:v.el,fa:v.fa};save();R()})};
+
+window.DEL=function(i){
+if(!confirm(‘Remover este story?’))return;
+var day=DAYS[st.day];data[day].splice(i,1);
+var nd={};Object.keys(st.done).forEach(function(k){var p=k.split(’-’);if(parseInt(p[0])===st.day){var x=parseInt(p[1]);if(x<i)nd[k]=st.done[k];else if(x>i)nd[p[0]+’-’+(x-1)]=st.done[k]}else nd[k]=st.done[k]});
+st.done=nd;save();R()};
+
+window.ADD=function(){
+var bo=BLOCKS.map(function(b){return{v:b.id,l:b.e+’ ‘+b.n}});
+showModal(‘Novo Story’,[
+{id:‘t’,label:‘HOR\u00c1RIO’,type:‘text’,val:’’},
+{id:‘b’,label:‘BLOCO’,type:‘select’,val:‘B3’,options:bo},
+{id:‘d’,label:‘DESCRI\u00c7\u00c3O’,type:‘text’,val:’’},
+{id:‘fo’,label:‘FORMATO’,type:‘text’,val:’’},
+{id:‘ce’,label:‘CEN\u00c1RIO’,type:‘text’,val:’’},
+{id:‘el’,label:‘ELEMENTOS’,type:‘text’,val:’’},
+{id:‘fa’,label:‘FALA / TEXTO’,type:‘textarea’,val:’’}
+],function(v){var day=DAYS[st.day];data[day].push({t:v.t,b:v.b,d:v.d,fo:v.fo,ce:v.ce,el:v.el,fa:v.fa});save();R()})};
+
+window.OB=function(id){
+var b=BM[id];var a=document.getElementById(‘app’);
+var h=’<div style="padding:14px 10px 4px;display:flex;align-items:center;gap:8px"><div style="width:28px;height:28px;background:#e94560;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;color:#fff;font-family:monospace">R</div><div><div style="font-size:14px;font-family:\'Space Mono\',monospace;font-weight:800;color:#fff">Rayhan Stories</div><div style="color:#2a2a2a;font-size:8px;font-family:monospace;letter-spacing:2px">CONTROLE DE STORIES</div></div></div>’;
+h+=’<div style="display:flex;gap:4px;padding:6px 10px;position:sticky;top:0;background:#050508;z-index:50"><button style="flex:1;padding:9px;border-radius:7px;font-size:11px;font-weight:700;background:#0c0c18;color:#3a3a3a" onclick="SV(\'daily\')">\u25c9 Dia</button><button style="flex:1;padding:9px;border-radius:7px;font-size:11px;font-weight:700;background:#e94560;color:#fff" onclick="SV(\'blocks\')">\u25a6 Blocos</button></div>’;
+h+=’<div style="padding:10px;padding-bottom:80px">’;
+h+=’<button style="background:none;border:1px solid #1a1a2e;color:#555;border-radius:6px;padding:5px 12px;font-size:10px;font-family:monospace;margin-bottom:10px;cursor:pointer" onclick="SV(\'blocks\')">\u2190 Voltar</button>’;
+h+=’<div style="background:#09090f;border:1px solid '+b.c+'33;border-left:4px solid '+b.c+';border-radius:10px;padding:14px;margin-bottom:12px"><span style="font-size:18px">’+b.e+’</span><h2 style="color:#fff;font-size:17px;margin:4px 0 0;font-family:\'Space Mono\',monospace">’+b.n+’</h2></div>’;
+DAYS.forEach(function(day){
+var items=(data[day]||[]).filter(function(s){return s.b===id});if(!items.length)return;
+h+=’<div style="margin-bottom:12px"><h3 style="color:'+b.c+';font-size:10px;font-family:monospace;font-weight:800;letter-spacing:1.5px;margin-bottom:5px">’+day.toUpperCase()+’</h3>’;
+items.forEach(function(s){
+h+=’<div style="background:#09090f;border:1px solid #141425;border-radius:7px;padding:8px 10px;margin-bottom:3px">’;
+h+=’<div style="display:flex;justify-content:space-between;margin-bottom:3px"><span style="color:#ccc;font-size:11px;font-weight:600">’+esc(s.d)+’</span><span style="color:#e94560;font-size:10px;font-family:monospace;font-weight:800">’+esc(s.t)+’</span></div>’;
+h+=’<div style="display:grid;grid-template-columns:1fr 1fr;gap:2px 6px"><span style="color:#555;font-size:9px;font-family:monospace">\ud83d\udcf7 ‘+esc(s.fo)+’</span><span style="color:#555;font-size:9px;font-family:monospace">\ud83d\udccd ‘+esc(s.ce)+’</span><span style="color:#555;font-size:9px;font-family:monospace">\u2726 ‘+esc(s.el)+’</span></div>’;
+h+=’<p style="color:#777;font-size:9px;font-family:monospace;font-style:italic;margin:3px 0 0">’+esc(s.fa)+’</p></div>’});
+h+=’</div>’});h+=’</div>’;a.innerHTML=h};
+
+window.RESET=function(){if(!confirm(‘Resetar tudo?’))return;data=JSON.parse(JSON.stringify(DEFAULT_DATA));st.done={};save();R()};
 
 R();
 })();
 </script>
+
 </body>
 </html>
