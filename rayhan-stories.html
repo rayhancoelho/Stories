@@ -15,7 +15,6 @@ textarea,input[type=text],select{font-family:monospace;outline:none}
 <div id="app"><p style="color:#e94560;padding:20px">Carregando...</p></div>
 <script>
 try{
-
 var DAYS=["Segunda","Terca","Quarta","Quinta","Sexta","Sabado","Domingo"];
 var DAYSD=["Segunda","Terca","Quarta","Quinta","Sexta","Sabado","Domingo"];
 var BLOCKS=[
@@ -30,225 +29,229 @@ var BLOCKS=[
 var BM={};BLOCKS.forEach(function(b){BM[b.id]=b});
 function mk(t,b,d,fo,ce,el,fa){return{t:t||"",b:b||"B3",d:d||"",fo:fo||"",ce:ce||"",el:el||"",fa:fa||""}}
 
-// ============================================
-// VARIAÇÕES POR SEMANA (1-4)
-// Cada funcao retorna array de stories daquela secao
-// w = semana (0-3)
-// ============================================
-
+// ====== TARDE ======
 function tardeWeek(w,fds){
-var base=[];
-if(!fds){
-// SEG-SEX
-var almocoFalas=["Refeicao forte agora. Janta leve as 16:30. O sono agradece.","Almoco forte. O corpo precisa de energia. A noite: leve.","Refeicao principal do dia. Depois so banana e cha.","Almoco. Energia pro resto do dia. Janta leve as 16:30."];
-var nyxFalas=["Deep work. 4 horas de foco valem mais que 10 de distracao.","Nyx. Modo execucao. O sono de ontem sustenta o foco de hoje.","Trabalho focado. Sem distracoes. O cerebro que dormiu e outro cerebro.","Nyx Project. Bloco de trabalho. O protocolo de ontem garante esse foco."];
-var reflexFalas=["Voce nao ta cansado porque trabalha muito. Ta cansado porque dorme mal.","Motivacao nao vem de podcast. Vem de ter dormido 8 horas.","10 horas de trabalho com sono ruim rendem menos que 4 com sono bom.","Todo mundo foca nas 5h da manha. Ninguem foca nas 22h. E a noite define tudo."];
-var pausaFalas=["Pausa a cada hora. 5 min respiracao + 5 min caminhada. O estresse nao acumula se voce nao deixa.","Pausa. O corpo precisa. O cerebro precisa. 5 minutos mudam o resto do dia.","Respiracao diafragmatica. 5 minutos. O sistema nervoso precisa saber que ta tudo bem.","Pausa anti-estresse. O estresse nao e o problema. E nao ter hora que ele para."];
-var jantaFalas=["Ultima refeicao do dia. Leve. Depois: so banana e cha de camomila.","Janta leve as 16:30. O estomago precisa estar vazio pra dormir bem.","Ultima refeicao. Leve. Digestao pesada compete com sono.","Janta. Pouca coisa. O corpo nao digere e dorme ao mesmo tempo."];
-var leitFalas=["Leitura. O cerebro sai do modo execucao. Primeiro passo do protocolo.","Leitura das 17h. Desaceleracao. O corpo comeca a entender que o dia ta acabando.","Livro aberto. Sem tela. O cerebro precisa de transicao antes de dormir.","Leitura. Todo dia, 17h. O cerebro desacelera. O sono agradece."];
-var aulaFalas=["Faculdade de oculos bloqueadores. A partir das 19h, zero luz azul.","Aula a noite. Oculos bloqueadores no rosto. O protocolo nao para nem na aula.","Faculdade. Oculos bloqueadores. Zero luz azul artificial.","Aula. De oculos bloqueadores. O cerebro ja ta produzindo melatonina."];
-var diarioFalas=["Journaling. Tudo que ficou na cabeca vai pro papel. Se nao sai agora, vira ruminacao.","Diario. Esvaziar a cabeca. O que pesou no dia sai aqui, nao no travesseiro.","Journaling. 5 minutos. O dia vai pro papel. A cabeca fica leve pro sono.","Diario. Zero preocupacoes a partir de agora. O que ficou, ficou no papel."];
-var banhoFalas=["Comecando a desacelerar. A parte mais importante do dia: parar.","O dia foi pesado. Agora a parte mais importante: desligar.","Banho quente no escuro, musica calma. O corpo comeca a entender que e hora.","Tudo que eu fiz hoje depende do que eu faco agora. Parar."];
-var etapa1Falas=["Camomila + banana. Triptofano e apigenina - precursores de melatonina. Difusor de lavanda ligado.","Cha de camomila. Apigenina se liga aos receptores de GABA. Ansiolitico natural. Banana: triptofano.","Lavanda no difusor. Ruido branco ligado. Celular fora do quarto. Cada detalhe e um sinal.","Cha, banana, difusor. Os mesmos objetos. O mesmo ritual. O corpo ja sabe o que vem depois."];
-var etapa2Falas=["Escuridao total. Protetor auricular. Dilatador nasal. Cada etapa e um sinal pro cerebro: pode desligar.","Blackout fechado. LEDs cobertos. Escuridao completa. O cerebro precisa disso pra manter melatonina.","Protetor + dilatador. Os dois menores itens do protocolo. Os dois mais eficazes.","Quarto escuro, gelado, silencioso. O ambiente ideal. O corpo sabe que e hora."];
-var leitNoiteFalas=["Leitura noturna. O livro abre de manha e fecha de noite. O arco do dia.","Ultimo capitulo do dia. Sem tela. So o livro e a luz quente.","Leitura. Quarto preparado. Lavanda. O corpo ja sabe o que vem.","Leitura noturna. A ultima coisa que faco antes da respiracao 4-7-8."];
-var pfFalas=["Ponto final.","Ponto final. Boa noite.","Ponto final. Amanha a gente volta.","Ponto final. O dia comecou ontem - e o de amanha comeca agora."];
-var posFalas=["Pra quem nao sabe, eu crio conteudo sobre sono, estresse e produtividade no corporativo.","Se voce acorda cansado todo dia, esse perfil e pra voce.","Sono mudou minha produtividade, meu treino, meu humor. E isso que eu mostro aqui.","O que eu faco: mostro na pratica como sono muda produtividade. Todo dia. Ao vivo."];
-var respFalas=["Mostrar print da melhor resposta. Dar nome ao problema (ex: ruminacao, jetlag social). Solucao pratica. CTA: Testa e me conta.","Print + resposta. Validar a dor: 'Isso acontece com muita gente.' Depois: solucao aplicavel.","Print + contrapopular a partir da resposta. Ex: 'A maioria acha que cafe resolve. Na real, mascara.'","Print + aprofundar. Essa pergunta e muito boa. Vou desdobrar. + solucao pratica."];
-var i=w;
-base.push(mk("12:30","B3","Almoco - refeicao principal do dia","Foto + texto","Mesa","Prato forte",almocoFalas[i]));
-base.push(mk("13:10","B3","Nyx Project - trabalho focado","Storyvlog","Mesa trabalho","Computador, fone",nyxFalas[i]));
-base.push(mk("13:30","B4","Resposta da caixinha/enquete","Print + texto","--","Print da resposta",respFalas[i]));
-base.push(mk("14:30","B3","Reflexao / Contrapopular do dia","Tela preta + texto","--","--",reflexFalas[i]));
-base.push(mk("15:00","B5","Posicionamento - quem sou e o que faco","Embutido","--","--",posFalas[i]));
-base.push(mk("15:30","B3","Pausa anti-estresse","Foto + texto","Corredor, ar livre","Mao no peito, passos",pausaFalas[i]));
-base.push(mk("16:30","B3","Janta - ultima refeicao (leve)","Foto + texto","Mesa","Prato leve",jantaFalas[i]));
-base.push(mk("17:10","B3","Leitura 17h - desaceleracao","Storyvlog","Ambiente calmo","Livro, luz tarde",leitFalas[i]));
-base.push(mk("18:30","B3","Aula faculdade (noite)","Foto + texto","Sala de aula","Caderno, oculos bloqueadores",aulaFalas[i]));
-base.push(mk("19:45","B3","Diario - journaling","Foto + texto","Mesa","Diario, caneta",diarioFalas[i]));
-base.push(mk("20:30","B6","Banho quente + reflexao noturna","Video falando (calmo, 15-20s)","Banheiro, luz quente","Vapor, luz quente",banhoFalas[i]));
-base.push(mk("21:00","B6","Etapa protocolo - cha, banana, difusor","Foto + texto","Quarto preparado","Xicara, banana, difusor",etapa1Falas[i]));
-base.push(mk("21:15","B6","Etapa protocolo - blackout, protetor, escuridao","Foto + texto","Quarto escuro","Blackout, protetor, dilatador",etapa2Falas[i]));
-base.push(mk("21:30","B6","Leitura noturna - ultima atividade","Storyvlog","Quarto, luz minima","Livro, luz quente",leitNoiteFalas[i]));
-base.push(mk("22:50","B7","PONTO FINAL - fechamento do dia","Foto escura / tela preta","Quarto escuro","Escuridao, modo aviao",pfFalas[i]));
-}else{
-// FDS
-var vulnFalas=["Sabado trabalhando. Cansativo. Mas sono, estresse e produtividade - e o que eu construo.","Nem todo dia e facil. Mas todo dia tem ponto final.","Final de semana e trabalho. E cansativo. Mas o protocolo garante que amanha eu volto inteiro.","O corpo reclama. A rotina sustenta. O protocolo nao depende de motivacao."];
-var rayFalas=["Producao de conteudo sobre sono e produtividade. E o que eu faco. (posicionamento embutido)","Rayhan. Preparando a semana. Os stories nascem aqui.","Producao de conteudo. O backstage do que voces veem todo dia.","Producao. No fim de semana tambem. O perfil nao cresce sozinho."];
-var pfFds=["Sabado. Mesmo ritual. Ponto final.","Ponto final. O protocolo nao tira folga. Nem no fim de semana.","Mesmo horario. Mesmo ritual. Ponto final. Boa noite.","Ponto final. Amanha a gente volta."];
-var reflexFds=["Sofa + celular + serie nao e descanso. E estimulo. Descanso e leitura, caminhada, grounding.","Descanso nao e dormir 12h. E manter o ritmo sem obrigacao.","A maioria vai dormir 3h hoje e chamar de curtir. Eu chamo de jetlag social.","Fim de semana nao e pra compensar sono. Se precisa recuperar, o problema ta na semana."];
-var banhoFds=["A parte mais importante: parar. O protocolo nao e lista. E linguagem corporal.","O dia foi pesado. Agora: parar. O protocolo cuida do resto.","Comecando a desacelerar. Mesmo ritual. O corpo ja sabe.","Banho quente. Fim de semana. O protocolo nao tira folga."];
-var i=w;
-base.push(mk("12:30","B3","Almoco de fim de semana","Foto + texto","Mesa","Prato","Almoco de "+((w%2===0)?"sabado.":"domingo.")));
-base.push(mk("13:10","B3","Nyx Project - fim de semana","Storyvlog","Mesa","Computador","Nyx no fim de semana. Construindo enquanto a maioria descansa."));
-base.push(mk("13:30","B4","Resposta da caixinha","Print + texto","--","Print","Resposta leve e pessoal (sabado) ou tema + antecipacao (domingo)."));
-base.push(mk("14:30","B3","Reflexao / Contrapopular","Tela preta + texto","--","--",reflexFds[i]));
-base.push(mk("15:30","B3","Pausa anti-estresse","Foto + texto","Corredor","Respiracao","O estresse nao acumula. Inclusive no fim de semana."));
-base.push(mk("16:30","B3","Janta - ultima refeicao","Foto + texto","Mesa","Prato leve","Ultima refeicao. Leve."));
-base.push(mk("17:10","B3","Leitura - desaceleracao","Storyvlog","Ambiente calmo","Livro","Desaceleracao. O cerebro precisa de transicao."));
-base.push(mk("17:30","B3","Rayhan - producao de conteudo","Storyvlog","Mesa","Computador",rayFalas[i]));
-base.push(mk("19:00","B3","Vulnerabilidade - momento real","Video falando (5-10s)","--","Rosto, sem filtro",vulnFalas[i]));
-base.push(mk("20:30","B6","Banho quente + reflexao","Video falando (calmo)","Banheiro, luz quente","Vapor",banhoFds[i]));
-base.push(mk("21:00","B6","Etapa protocolo","Foto + texto","Quarto","Cha, difusor","Etapa do dia com porque tecnico."));
-base.push(mk("21:30","B6","Leitura noturna","Storyvlog","Quarto","Livro","Arco do livro. Sem pressa. Sem tela."));
-base.push(mk("22:00","B6","Etapa protocolo 2","Foto + texto","Quarto escuro","Blackout, protetor","Escuridao total."));
-base.push(mk("22:50","B7","PONTO FINAL","Foto escura + texto","Quarto escuro","Escuridao",pfFds[i]));
-}
-return base;
-}
-
-function manhaWeek(day,w){
 var s=[];
-// Variacoes de formato/visual/fala por semana
-var fos1=["Video falando (fixo)","Video falando (fixo)","Video falando (fixo)","Video falando (fixo)"];
-var hab1Fo=["Video sem fala + texto","Foto + texto","Video sem fala + texto","Boomerang + texto"];
-var hab2Fo=["Foto + texto","Video sem fala + texto","Foto + texto","Foto + texto"];
-var hab1El=[["Chuveiro (banho gelado)","Pes no chao (grounding)","Sol na janela","Mao abrindo registro (gelado)"],["Sol na janela","Alongamento, silhueta","Agua, copo enchendo","Pes descalcos, grama"],["Chuveiro (banho gelado)","Celular longe, virado","Respiracao, mao no peito","Sol, rosto na janela"],["Caminhada, rua vazia","Chuveiro (banho gelado)","Alongamento, corpo","Agua + celular longe"]];
-var hab1Fa=[["Primeiro choque do dia. Banho gelado.","Grounding. Pe no chao. O corpo precisa sentir que o dia comecou.","Sol. Melatonina desliga. Cortisol liga. Sem cafe.","Toda manha a mesma escolha. Abrir o registro ou apertar a soneca."],["Sol. Luz natural nos olhos. O jeito mais antigo de acordar.","Alongamento. O corpo carrega tensao do sono. Isso tira.","Agua. Primeiro gole depois de 8 horas.","Grounding. Pe descalco. O corpo precisa do chao."],["Banho gelado. O corpo reclama. O cerebro agradece.","Sem celular. Zero notificacao. A manha e minha.","Respiracao. 5 minutos. O dia comeca calmo por dentro.","Sol na cara. O corpo precisa de luz pra saber que o dia comecou."],["Caminhada. 5 minutos. Ar fresco. O corpo acorda por completo.","Primeiro choque do dia. O corpo parou de reclamar. Agora ele espera.","Alongamento. Libera o que o corpo segurou dormindo.","Agua por dentro. Celular longe. A manha e minha."]];
-
-if(day==="Segunda"){
-var s1Fa=["06:30. Segunda. Treino, faculdade, Nyx, aula. 8h de sono. O dia comecou ontem.","A cidade dorme. Eu to indo treinar. A diferenca? Dormi as 22:30.","Segunda. O dia mais pesado. E o mais facil quando dormiu direito.","O protocolo de ontem me garantiu hoje. To pronto pro dia mais pesado."];
-var s2El=["Tenis na porta","Cama arrumada","Celular mostrando 06:30","Janela, transicao escuro-claro"];
-var s2Fa=["Tudo cabe num dia. Se voce dormiu.","8 horas. Cama feita. O resto e consequencia.","Sem despertador. O protocolo funciona.","Ontem as 22:30 eu decidi que hoje ia ser um bom dia."];
-var treinoPosFa=["Treino de manha. Cortisol natural. O corpo ta acordado sem cafe.","2h de treino. O corpo agradece quem dormiu.","Corpo destruido, mas melhor sensacao da semana.","O treino de manha melhora o sono a noite. Gasta energia no momento certo."];
-var caixFa=["Como comecou sua segunda? (enquete: Dormi bem / Dormi mal / Soneca 5x / Nem dormi)","O que mais te impede de dormir? (caixinha de dor)","Quantas horas voce dorme por noite? Seja honesto. (caixinha)","Motivacao vem de onde? (caixinha de opiniao)"];
-s.push(mk("06:30","B1","Abertura S1 - acordei, dia pesado (FALAR)",fos1[w],"Quarto, luz baixa","Rosto recem-acordado",s1Fa[w]));
-s.push(mk("06:30","B1","Abertura S2 - contexto e porque to pronto","Foto + texto","--",s2El[w],s2Fa[w]));
-s.push(mk("06:30","B2","Habito matinal 1",hab1Fo[w],"Banheiro / quarto",hab1El[w][0],hab1Fa[w][0]));
-s.push(mk("06:35","B2","Habito matinal 2",hab2Fo[w],"Quarto / janela",hab1El[w][1],hab1Fa[w][1]));
-s.push(mk("06:50","B2","Indo pro treino","Foto + texto","Caminho academia","Tenis, mochila","06:45. Treino. Segunda comecou."));
-s.push(mk("08:15","B2","Pos-treino - conexao com sono","Video falando (5-10s)","Academia","Rosto suado",treinoPosFa[w]));
-s.push(mk("08:45","B3","Aula faculdade (manha)","Foto + texto","Sala de aula","Caderno, caneta","Contexto ou aprendizado extraido da aula."));
-s.push(mk("09:30","B4","Enquete ou Caixinha","Foto + sticker","Foto do momento","Mesa, cafe",caixFa[w]));
-s.push(mk("10:10","B2","Rayhan - producao de conteudo","Storyvlog","Mesa, computador","Tela, caderno, fone","O que voces veem na semana sai daqui."));
-}
-else if(day==="Terca"){
-var s1Fo=["Foto + texto","Video sem fala + texto","Print de tela","Foto + texto"];
-var s1El=["Janela do quarto","Pes saindo da cama","Celular 06:30 sem alarme","Silhueta de pe, luz baixa"];
-var s1Fa=["06:30. Terca. Mesmo horario. O dia comecou ontem.","O corpo ja sabe o caminho.","Sem despertador. O corpo acorda sozinho quando dorme no horario.","Acordei antes do despertador. De novo."];
-var s2Fa=["Sem drama. Dormiu bem, acordou bem.","O sono de ontem garantiu. Segue o plano.","Consistencia e mais importante que dias extraordinarios.","Nao existe dia dificil quando o sono ta em dia. Existe so o dia."];
-var caixFa=["O que mais te impede de dormir? (caixinha)","Qual o maior ladrao de sono na sua vida? (caixinha)","Voce tem rotina antes de dormir ou so apaga? (caixinha)","O que voce sente nos ultimos 30 min antes de dormir? (caixinha)"];
-s.push(mk("06:30","B1","Abertura S1 - consistencia silenciosa",s1Fo[w],"Janela / quarto",s1El[w],s1Fa[w]));
-s.push(mk("06:30","B1","Abertura S2 - complemento calmo","Foto + texto","--","Copo dagua, mesa",s2Fa[w]));
-s.push(mk("06:30","B2","Habito matinal 1",hab1Fo[w],"Banheiro",hab1El[w][0],hab1Fa[w][0]));
-s.push(mk("06:35","B2","Habito matinal 2",hab2Fo[w],"Quarto",hab1El[w][1],hab1Fa[w][1]));
-s.push(mk("06:50","B2","Rayhan - producao antes do treino","Storyvlog","Mesa","Tela, caderno","Producao de conteudo. 3 horas antes do treino."));
-s.push(mk("09:30","B4","Caixinha - dor da audiencia","Foto + sticker","Mesa","Cafe",caixFa[w]));
-s.push(mk("10:10","B2","Indo pro treino","Foto + texto","Caminho","Tenis","3h de producao rendidas. Agora o corpo."));
-s.push(mk("11:30","B2","Corrida - anti-estresse","Video sem fala + texto","Ar livre","Pes, percurso","Corrida. O estresse sai pelas pernas."));
-}
-else if(day==="Quarta"){
-var s1Fa=["Quarta. Metade da semana. Mesma hora. O dia comecou ontem.","O meio da semana nao pesa quando as noites sao boas.","A semana nao desgasta quem dorme.","Quarta. 06:30. Metade da semana rendida."];
-var s2Fa=["3 noites de protocolo. 3 manhas sem despertador. O acumulado aparece.","Metade da semana. Energia intacta. Segredo: 22:30, protocolo, 8h.","Meu corpo nao diferencia segunda de quarta. Mesmo protocolo.","Metade do caminho. E eu to exatamente igual a segunda."];
-var s1Fo=["Foto + texto","Video sem fala + texto","Tela preta + texto","Foto + texto"];
-var s2Fo=["Video falando (5s)","Foto + texto","Video falando (5s)","Foto + texto"];
-var caixFa=["Trabalhar mais = produzir mais? (caixinha opiniao)","Cafe depois das 14h? (enquete: Todo dia / As vezes / Nunca / Nao sabia)","Descanso pra voce e o que? (caixinha opiniao)","Voce faz pausa no trabalho? (enquete)"];
-s.push(mk("06:30","B1","Abertura S1 - metade da semana",s1Fo[w],"Janela","Janela, livro na cabeceira",s1Fa[w]));
-s.push(mk("06:30","B1","Abertura S2 - acumulado",s2Fo[w],"--","Rosto ou cafe",s2Fa[w]));
-s.push(mk("06:30","B2","Habito matinal 1",hab1Fo[w],"Banheiro",hab1El[w][0],hab1Fa[w][0]));
-s.push(mk("06:50","B2","Rayhan curto - 45 min","Storyvlog","Mesa","Computador","45 minutos de producao. Depois: treino."));
-s.push(mk("07:35","B2","Habito matinal 2",hab2Fo[w],"Quarto",hab1El[w][1],hab1Fa[w][1]));
-s.push(mk("07:50","B2","Treino - terceiro dia","Video sem fala + texto","Academia","Execucao, peso","Terceiro dia seguido. O corpo ta condicionado."));
-s.push(mk("09:30","B2","Corrida","Video sem fala + texto","Ar livre","Percurso","O estresse sai pelas pernas. Metade da semana limpa."));
-s.push(mk("10:15","B3","Aula faculdade","Foto + texto","Sala","Caderno","Contexto."));
-s.push(mk("11:00","B4","Caixinha - opiniao/provocacao","Foto + sticker","Cafe, mesa","--",caixFa[w]));
-}
-else if(day==="Quinta"){
-var s1Fa=["Dormi 22:30, acordei sem despertador. Hoje a noite: protocolo inteiro. Fica ate o final.","06:30. Quinta. Sem despertador. 4 dias seguidos.","Quinta. Mais uma noite de 8h. O dia comecou ontem. Hoje tem protocolo.","Dormi 22:30. Acordei 06:28. O corpo tem relogio proprio."];
-var s2Fa=["Nao e genetica. E protocolo. Hoje voces vao ver como. Fica ate o final.","4 noites de protocolo, 4 manhas sem alarme. Coincidencia? Hoje eu provo que nao.","Hoje a noite: passo a passo das 19h ate 22:30. 15+ etapas. Cola ate o final.","Esse cenario me fez dormir. Hoje voces vao ver cada etapa ao vivo."];
-var s1Fo=["Video falando (5-10s)","Video sem fala + texto","Print de tela","Foto + texto"];
-var enquFa=["Ultimo horario que olha o celular antes de dormir? (21h/22h/23h/Meia-noite+)","Voce tem rotina antes de dormir? (Sim/Tento mas falho/Nao tenho/Que rotina?)","Quantas horas dorme? (4-5h/5-6h/6-7h/7-8h+)","Voce acorda com despertador? (Sempre/As vezes/Nunca preciso/10 alarmes)"];
-s.push(mk("06:30","B1","Abertura S1 - previa do protocolo",s1Fo[w],"Quarto","Rosto, objetos protocolo",s1Fa[w]));
-s.push(mk("06:30","B1","Abertura S2 - GANCHO protocolo (FIXO)","Video falando ou Foto","--","Rosto, objetos cabeceira",s2Fa[w]));
-s.push(mk("06:30","B2","Habito matinal 1",hab1Fo[w],"Banheiro",hab1El[w][0],hab1Fa[w][0]));
-s.push(mk("06:35","B2","Habito matinal 2",hab2Fo[w],"Quarto",hab1El[w][1],hab1Fa[w][1]));
-s.push(mk("06:50","B2","Rayhan - produzindo protocolo","Storyvlog","Mesa","Computador","Produzindo o conteudo do protocolo de hoje."));
-s.push(mk("09:30","B4","Enquete - dados pro protocolo","Foto + sticker","Pos-treino","--",enquFa[w]));
-s.push(mk("10:10","B2","Treino","Video sem fala + texto","Academia","Execucao","Depois de 3h producao, agora o corpo."));
-s.push(mk("11:30","B2","Corrida - gancho noite","Video falando (5s)","Ar livre","Suado","4 dias de treino. O sono sustenta. Hoje voces vao ver como."));
-}
-else if(day==="Sexta"){
-var s1Fa=["Sexta. 06:30. Mesmo horario. O protocolo nao tira folga.","06:30. Sexta. O corpo nao sabe que e sexta. E esse e o ponto.","A maioria ja ta planejando dormir meia-noite. Eu vou dormir 22:30.","Sexta. 5 noites. 5x 22:30. 5x 06:30. Consistencia."];
-var s2Fa=["A tentacao de dormir tarde e real. Mas a segunda cobra.","5 dias no mesmo horario. O fim de semana nao vai quebrar.","Sexta de manha. Quem dormiu ta aqui.","Uma noite mal dormida reseta 5 dias. Nao vale."];
-var s1Fo=["Foto + texto","Video sem fala + texto","Tela preta + texto","Print de tela"];
-var caixFa=["O que muda na sua rotina no fim de semana? (caixinha)","Voce vai dormir mais tarde hoje porque e sexta? (caixinha)","Fim de semana voce dorme mais tarde? (enquete: Sim/As vezes/Nunca)","O que voce faz pra desligar do trabalho? (caixinha)"];
-s.push(mk("06:30","B1","Abertura S1 - protocolo nao tira folga",s1Fo[w],"Janela / quarto","Janela, tenis",s1Fa[w]));
-s.push(mk("06:30","B1","Abertura S2 - sexta nao e desculpa","Video falando (5s)","--","Rosto, agua",s2Fa[w]));
-s.push(mk("06:30","B2","Habito matinal 1",hab1Fo[w],"Banheiro",hab1El[w][0],hab1Fa[w][0]));
-s.push(mk("06:35","B2","Habito matinal 2",hab2Fo[w],"Quarto",hab1El[w][1],hab1Fa[w][1]));
-s.push(mk("06:50","B2","Treino - 5 dias seguidos","Foto + texto","Caminho","Tenis","5 dias seguidos. Sexta de manha."));
-s.push(mk("08:15","B2","Pos-treino","Video falando (5s)","Academia","Rosto suado","O fim de semana nao e pra destruir - e pra manter."));
-s.push(mk("08:45","B3","Aula faculdade","Foto + texto","Sala","Caderno","Contexto."));
-s.push(mk("09:00","B4","Caixinha - fim de semana e sono","Foto + sticker","--","--",caixFa[w]));
-s.push(mk("10:15","B3","Segunda aula","Foto + texto","Sala","Material","Contexto."));
-}
-else if(day==="Sabado"){
-var s1Fa=["Sabado. A maioria vai acordar meio-dia. Eu ja to de pe. Dormi 22:30.","Sabado. 06:30. Sem pressa. Sem despertador. Sem bagunca no relogio.","06:30 no sabado. Nao e disciplina. E que dormi 22:30.","Sabado. [X] dias seguidos. O corpo agradece."];
-var s2Fa=["Descanso nao e dormir 12h. E manter o ritmo sem obrigacao.","6 dias no mesmo horario. Consistencia nao e so dia util.","O segredo do sono bom na segunda e nao destruir o padrao no sabado.","O corpo agradece consistencia mais do que descanso."];
-var s1Fo=["Video falando (5s)","Video sem fala + texto","Video falando (5s)","Foto + texto"];
-s.push(mk("06:30","B1","Abertura S1 - mesmo horario no sabado",s1Fo[w],"Varanda / janela","Rosto, sol",s1Fa[w]));
-s.push(mk("06:30","B1","Abertura S2 - descanso nao e dormir 12h","Foto + texto","--","Ambiente calmo, cama",s2Fa[w]));
-s.push(mk("06:30","B2","Habito matinal 1",hab1Fo[w],"Banheiro",hab1El[w][0],hab1Fa[w][0]));
-s.push(mk("06:35","B2","Habito matinal 2",hab2Fo[w],"Varanda",hab1El[w][1],hab1Fa[w][1]));
-s.push(mk("06:50","B2","Treino / atividade","Video sem fala + texto","Ar livre","Tenis","Treino. Sabado. Mesmo horario."));
-s.push(mk("07:30","B2","Corrida - rua vazia de sabado","Video sem fala + texto","Ar livre","Paisagem, rua vazia","Corrida. Rua vazia. Sabado. O estresse sai pelas pernas."));
-s.push(mk("09:30","B4","Caixinha pessoal (1x/semana)","Foto + sticker","Cafe, livro","--","Pergunte qualquer coisa - menos sobre sono."));
-}
-else if(day==="Domingo"){
-var s1Fa=["Domingo. 06:30. O sono de hoje define a segunda. O dia comecou ontem.","Domingo. 06:30. 7 dias no mesmo horario. Semana completa.","A semana que vem comeca hoje. No sono de hoje.","Domingo. 06:30. Ultima manha da semana. Mesmo horario da primeira."];
-var s2Fa=["Amanha e o dia mais pesado. A preparacao comeca agora.","Hoje a noite e o sono mais importante da semana. Vou tratar assim.","Domingo tranquilo. Mas o protocolo de hoje define a segunda.","A semana que vem comeca hoje. Nao amanha. No sono de hoje."];
-var caixFa=["Qual tema voces querem que eu aprofunde essa semana? (caixinha)","Sobre o que voces tem mais duvida: sono, estresse ou produtividade? (caixinha)","O que voces gostariam de ver mais aqui? (caixinha)","Se pudesse me definir em 2 palavras, quais seriam? (percepcao 1x/mes)"];
-s.push(mk("06:30","B1","Abertura S1 - sono define segunda (FOTO CALMA fixo)","Foto calma (fixo)","Janela luz suave","Luz suave, livro",s1Fa[w]));
-s.push(mk("06:30","B1","Abertura S2 - a semana comeca hoje","Foto + texto / Video falando","--","Agua, sol, livro",s2Fa[w]));
-s.push(mk("06:30","B2","Habito matinal 1",hab1Fo[w],"Banheiro",hab1El[w][0],hab1Fa[w][0]));
-s.push(mk("06:35","B2","Habito matinal 2",hab2Fo[w],"Varanda",hab1El[w][1],hab1Fa[w][1]));
-s.push(mk("07:00","B2","Leitura ou caminhada - descanso ativo","Foto + texto","Ar livre","Livro, paisagem","Sem treino pesado. Leitura e caminhada. Descanso ativo."));
-s.push(mk("07:30","B2","Caminhada leve de domingo","Video sem fala + texto","Ar livre","Rua calma","Caminhada leve. Movimento sem cobranca."));
-s.push(mk("09:30","B4","Caixinha - pesquisa de conteudo","Foto + sticker","Caderno, cafe","--",caixFa[w]));
+var i=w;
+if(!fds){
+// Contrapopulares rodam por semana E por dia (usando indice do dia chamador, mas aqui e generico por semana)
+var reflex=["Voce nao ta cansado porque trabalha muito. Ta cansado porque dorme mal.","Motivacao nao vem de podcast. Vem de ter dormido 8 horas.","10h de trabalho com sono ruim < 4h com sono bom. Eu vivo isso.","Todo mundo foca nas 5h da manha. Ninguem foca nas 22h. E la que tudo se decide."];
+var posic=["Pra quem nao sabe, eu crio conteudo sobre sono, estresse e produtividade.","Se voce acorda cansado todo dia, esse perfil e pra voce.","Sono mudou minha produtividade, treino, humor. E isso que mostro aqui.","O que eu faco: mostro na pratica como sono muda tudo. Todo dia. Ao vivo."];
+var resp=["Print + dar nome ao problema. Ex: 'Isso tem nome: ruminacao.' + solucao pratica + CTA: 'Testa e me conta.'","Print + validar: 'Isso acontece com muita gente.' + solucao aplicavel do protocolo.","Print + contrapopular: 'A maioria acha X. A real e Y.' + conectar com o perfil.","Print + aprofundar: 'Essa pergunta e muito boa. Vou desdobrar.' + solucao + CTA."];
+var banho=["Comecando a desacelerar. A parte mais importante do dia: parar.","O dia foi pesado. Agora a parte mais importante: desligar.","Banho quente no escuro. Musica calma. O corpo comeca a entender.","Tudo que eu fiz hoje depende do que eu faco agora. Parar."];
+var etapa1=["Camomila + banana. Triptofano + apigenina. Precursores de melatonina.","Cha de camomila. Apigenina se liga ao GABA. Ansiolitico natural.","Lavanda no difusor. Ruido branco. Celular fora. Cada detalhe e um sinal.","Cha, banana, difusor. Mesmo ritual. O corpo ja sabe o que vem."];
+var etapa2=["Escuridao total. Protetor auricular. Dilatador. Cada etapa: pode desligar.","Blackout fechado. LEDs cobertos. Escuridao completa. Melatonina livre.","Protetor + dilatador. Os menores itens. Os mais eficazes.","Quarto escuro, gelado, silencioso. O ambiente ideal. O corpo sabe."];
+var leitN=["Leitura noturna. Livro abre de manha e fecha de noite. Arco do dia.","Ultimo capitulo do dia. Sem tela. So o livro e a luz quente.","Leitura. Quarto preparado. Lavanda. O corpo ja sabe.","A ultima coisa antes da respiracao 4-7-8. Livro. Silencio."];
+var pf=["Ponto final.","Ponto final. Boa noite.","Ponto final. Amanha a gente volta.","Ponto final. O de amanha comeca agora."];
+s.push(mk("12:30","B3","Almoco - refeicao principal","Foto + texto","Mesa","Prato forte","Refeicao forte. Janta leve. O sono agradece."));
+s.push(mk("13:10","B3","Nyx Project - trabalho focado","Storyvlog","Mesa trabalho","Computador, fone","Deep work. O sono de ontem sustenta o foco de hoje."));
+s.push(mk("13:30","B4","Resposta da caixinha/enquete","Print + texto","--","Print da resposta",resp[i]));
+s.push(mk("14:30","B3","Reflexao / Contrapopular","Tela preta + texto","--","--",reflex[i]));
+s.push(mk("15:00","B5","Posicionamento (embutido)","Embutido","--","--",posic[i]));
+s.push(mk("15:30","B3","Pausa anti-estresse","Foto + texto","Corredor, ar livre","Mao no peito / passos","O estresse nao acumula se voce nao deixa."));
+s.push(mk("16:30","B3","Janta leve","Foto + texto","Mesa","Prato leve","Ultima refeicao. Depois: so banana e cha."));
+s.push(mk("17:10","B3","Leitura 17h","Storyvlog","Ambiente calmo","Livro, luz tarde","Desaceleracao. Primeiro passo do protocolo."));
+s.push(mk("18:30","B3","Aula faculdade","Foto + texto","Sala","Caderno, oculos bloqueadores","Faculdade de oculos bloqueadores. Zero luz azul."));
+s.push(mk("19:45","B3","Diario - journaling","Foto + texto","Mesa","Diario, caneta","Journaling. Tudo que ficou na cabeca vai pro papel."));
+s.push(mk("20:30","B6","Banho quente + reflexao noturna","Video falando (calmo)","Banheiro, luz quente","Vapor",banho[i]));
+s.push(mk("21:00","B6","Etapa protocolo - cha, difusor, celular fora","Foto + texto","Quarto preparado","Xicara, banana, difusor",etapa1[i]));
+s.push(mk("21:15","B6","Etapa protocolo - blackout, protetor","Foto + texto","Quarto escuro","Blackout, protetor, dilatador",etapa2[i]));
+s.push(mk("21:30","B6","Leitura noturna","Storyvlog","Quarto, luz minima","Livro",leitN[i]));
+s.push(mk("22:50","B7","PONTO FINAL","Foto escura / tela preta","Quarto escuro","Escuridao, modo aviao",pf[i]));
+}else{
+var vulnF=["Sabado trabalhando. Cansativo. Mas e o que construo.","Nem todo dia e facil. Mas todo dia tem ponto final.","Final de semana e trabalho. O protocolo garante que amanha volto inteiro.","O corpo reclama. A rotina sustenta. Nao depende de motivacao."];
+var rayF=["Producao sobre sono e produtividade. E o que eu faco.","Rayhan. Os stories da semana nascem aqui.","Producao. O backstage do que voces veem todo dia.","No fim de semana tambem. O perfil nao cresce sozinho."];
+var reflexF=["Sofa + celular + serie nao e descanso. E estimulo.","Descanso nao e dormir 12h. E manter o ritmo sem obrigacao.","A maioria vai dormir 3h e chamar de curtir. Eu chamo de jetlag social.","Fim de semana nao e pra compensar sono. O problema ta na semana."];
+var banhoF=["A parte mais importante: parar. Linguagem corporal.","O dia foi pesado. Agora: parar. O protocolo cuida.","Comecando a desacelerar. Mesmo ritual. O corpo sabe.","Banho quente. Fim de semana. O protocolo nao tira folga."];
+var pfF=["Sabado. Mesmo ritual. Ponto final.","Ponto final. O protocolo nao tira folga.","Mesmo horario. Ponto final. Boa noite.","Ponto final. Amanha a gente volta."];
+s.push(mk("12:30","B3","Almoco de fim de semana","Foto + texto","Mesa","Prato","Almoco."));
+s.push(mk("13:10","B3","Nyx Project","Storyvlog","Mesa","Computador","Nyx no fim de semana."));
+s.push(mk("13:30","B4","Resposta caixinha","Print + texto","--","Print","Resposta leve (sab) ou tema + antecipacao (dom)."));
+s.push(mk("14:30","B3","Reflexao / Contrapopular","Tela preta + texto","--","--",reflexF[i]));
+s.push(mk("15:30","B3","Pausa","Foto + texto","Corredor","Respiracao","O estresse nao acumula. Inclusive no fim de semana."));
+s.push(mk("16:30","B3","Janta leve","Foto + texto","Mesa","Prato leve","Ultima refeicao. Leve."));
+s.push(mk("17:10","B3","Leitura","Storyvlog","Ambiente calmo","Livro","Desaceleracao."));
+s.push(mk("17:30","B3","Rayhan - producao","Storyvlog","Mesa","Computador",rayF[i]));
+s.push(mk("19:00","B3","Vulnerabilidade","Video falando","--","Rosto",vulnF[i]));
+s.push(mk("20:30","B6","Banho quente + reflexao","Video falando (calmo)","Banheiro","Vapor",banhoF[i]));
+s.push(mk("21:00","B6","Etapa protocolo","Foto + texto","Quarto","Cha, difusor","Etapa com porque tecnico."));
+s.push(mk("21:30","B6","Leitura noturna","Storyvlog","Quarto","Livro","Arco do livro."));
+s.push(mk("22:00","B6","Etapa protocolo 2","Foto + texto","Quarto escuro","Blackout","Escuridao total."));
+s.push(mk("22:50","B7","PONTO FINAL","Foto escura","Quarto escuro","Escuridao",pfF[i]));
 }
 return s;
 }
 
-function buildWeek(w){
-var d={};
-DAYS.forEach(function(day){
-var m=manhaWeek(day,w);
-var isFds=(day==="Sabado"||day==="Domingo");
-var t=tardeWeek(w,isFds);
-d[day]=m.concat(t);
-});
-return d;
+// ====== MANHÃS - CADA DIA É DIFERENTE ======
+// Habitos por dia da semana (fixo, nao muda por semana):
+// SEG: banho gelado + agua
+// TER: sol + grounding
+// QUA: banho gelado + alongamento
+// QUI: respiracao + sol
+// SEX: banho gelado + sem celular
+// SAB: grounding + alongamento
+// DOM: caminhada + respiracao
+// O que muda por SEMANA: formato do habito, fala/texto, e formato dos outros stories
+
+function manhaWeek(day,w){
+var s=[];
+var i=w;
+
+if(day==="Segunda"){
+// Angulo: peso + contraste. S1 SEMPRE video falando.
+var s1Fa=["06:30. Segunda. Treino, faculdade, Nyx, aula. 8h de sono. O dia comecou ontem.","A cidade dorme. Eu to indo treinar. A diferenca? Dormi as 22:30.","Segunda. O dia mais pesado. E o mais facil quando dormiu direito.","O protocolo de ontem me garantiu hoje. [X] dias seguidos."];
+var s2El=["Tenis na porta","Cama arrumada","Celular mostrando 06:30","Janela clareando"];
+var s2Fo=["Foto + texto","Foto + texto","Print de tela","Foto + texto"];
+var s2Fa=["Tudo cabe num dia. Se voce dormiu.","8 horas. Cama feita. O resto e consequencia.","Sem despertador. O protocolo funciona.","Ontem as 22:30 eu decidi que hoje ia ser um bom dia."];
+// HABITOS SEG: banho gelado + agua
+var h1Fo=["Video sem fala + texto","Video sem fala + texto","Boomerang + texto","Video sem fala + texto"];
+var h1Fa=["Primeiro choque do dia. Banho gelado. O corpo reclama. O cerebro agradece.","Banho gelado. Cortisol natural. Dopamina natural. Sem cafe.","Toda manha a mesma escolha. Abrir o registro.","O corpo parou de reclamar. Agora ele espera o gelado."];
+var h2Fo=["Foto + texto","Video sem fala + texto","Foto + texto","Foto + texto"];
+var h2Fa=["Agua. Primeiro gole depois de 8 horas.","Hidratacao antes de qualquer tela. Primeiro ato do dia.","Agua por dentro. Agua gelada por fora.","Agua. Primeiro ato. Celular? So depois das 7."];
+var trPo=["Treino de manha. Cortisol natural. Corpo acordado sem cafe.","2h de treino. O corpo agradece quem dormiu.","Corpo destruido, mas melhor sensacao da semana.","O treino de manha melhora o sono a noite."];
+var caixa=["Como comecou sua segunda? (enquete: Dormi bem / Dormi mal / Soneca 5x)","O que mais te impede de dormir? (caixinha)","Motivacao vem de onde? (caixinha opiniao)","Primeira coisa que voce faz ao acordar? (enquete)"];
+s.push(mk("06:30","B1","Abertura S1 - dia pesado + sono (FALAR)","Video falando (fixo)","Quarto, luz baixa","Rosto recem-acordado",s1Fa[i]));
+s.push(mk("06:30","B1","Abertura S2 - contexto do dia",s2Fo[i],"--",s2El[i],s2Fa[i]));
+s.push(mk("06:30","B2","Banho gelado",h1Fo[i],"Banheiro","Chuveiro, agua escorrendo, reacao",h1Fa[i]));
+s.push(mk("06:35","B2","Agua - primeiro ato",h2Fo[i],"Quarto / cozinha","Copo dagua enchendo ou na mao",h2Fa[i]));
+s.push(mk("06:50","B2","Indo pro treino","Foto + texto","Caminho academia","Tenis, mochila, rua","06:45. Treino. Segunda comecou."));
+s.push(mk("08:15","B2","Pos-treino","Video falando (5-10s)","Academia","Rosto suado",trPo[i]));
+s.push(mk("08:45","B3","Aula faculdade (manha)","Foto + texto","Sala de aula","Caderno, caneta","Contexto ou aprendizado."));
+s.push(mk("09:30","B4","Enquete ou Caixinha","Foto + sticker","Foto do momento","Mesa, cafe",caixa[i]));
+s.push(mk("10:10","B2","Rayhan - producao","Storyvlog","Mesa, computador","Tela, caderno, fone","O que voces veem na semana sai daqui."));
+}
+else if(day==="Terca"){
+// Angulo: consistencia silenciosa. Prioridade NAO falar.
+var s1Fo=["Foto + texto","Video sem fala + texto","Print de tela","Foto + texto"];
+var s1El=["Janela do quarto","Pes saindo da cama","Celular 06:30 sem alarme","Silhueta de pe, luz baixa"];
+var s1Fa=["06:30. Terca. Mesmo horario. O dia comecou ontem.","O corpo ja sabe o caminho.","Sem despertador. O corpo acorda sozinho.","Acordei antes do despertador. De novo."];
+var s2Fa=["Sem drama. Dormiu bem, acordou bem.","O sono de ontem garantiu. Segue o plano.","Consistencia e mais importante que dias extraordinarios.","Nao existe dia dificil quando o sono ta em dia."];
+// HABITOS TER: sol + grounding
+var h1Fo=["Foto + texto","Video sem fala + texto","Foto + texto","Video sem fala + texto"];
+var h1Fa=["Sol. Melatonina desliga. Cortisol liga. Sem cafe.","Sol. Luz natural nos olhos. O jeito mais antigo de acordar.","Pos-banho. Sol. O corpo ja ta acordado de verdade.","Sol na cara. O corpo precisa de luz pra saber que o dia comecou."];
+var h2Fa=["Grounding. Pe no chao. O corpo precisa sentir que o dia comecou.","Grounding. Pe descalco. 2 minutos. O corpo nao acorda com celular.","Pe no chao. O corpo precisa sentir o chao antes de qualquer tela.","Grounding. Pe descalco no chao. O ritual mais simples. O mais antigo."];
+var caixa=["O que mais te impede de dormir? (caixinha dor)","Qual o maior ladrao de sono? (caixinha dor)","Voce tem rotina antes de dormir? (caixinha habito)","O que voce sente nos ultimos 30 min antes de dormir? (caixinha)"];
+s.push(mk("06:30","B1","Abertura S1 - consistencia silenciosa",s1Fo[i],"Janela / quarto",s1El[i],s1Fa[i]));
+s.push(mk("06:30","B1","Abertura S2 - calmo, sem drama","Foto + texto","--","Copo dagua, mesa",s2Fa[i]));
+s.push(mk("06:30","B2","Sol - luz natural nos olhos",h1Fo[i],"Janela do quarto","Rosto na janela, luz entrando",h1Fa[i]));
+s.push(mk("06:35","B2","Grounding - pe no chao",h1Fo[i],"Quarto / varanda","Pes descalcos no chao",h2Fa[i]));
+s.push(mk("06:50","B2","Rayhan - producao","Storyvlog","Mesa","Tela, caderno","Producao de conteudo. 3 horas antes do treino."));
+s.push(mk("09:30","B4","Caixinha - dor da audiencia","Foto + sticker","Mesa","Cafe, caderno",caixa[i]));
+s.push(mk("10:10","B2","Indo pro treino","Foto + texto","Caminho","Tenis","3h de producao rendidas. Agora o corpo."));
+s.push(mk("11:30","B2","Corrida","Video sem fala + texto","Ar livre","Pes, percurso, suado","Corrida. O estresse sai pelas pernas."));
+}
+else if(day==="Quarta"){
+// Angulo: metade da semana, acumulado
+var s1Fo=["Foto + texto","Video sem fala + texto","Tela preta + texto","Foto + texto"];
+var s1Fa=["Quarta. Metade da semana. Mesma hora. O dia comecou ontem.","O meio da semana nao pesa quando as noites sao boas.","A semana nao desgasta quem dorme.","Quarta. 06:30. Metade da semana rendida."];
+var s2Fo=["Video falando (5s)","Foto + texto","Video falando (5s)","Foto + texto"];
+var s2Fa=["3 noites de protocolo. 3 manhas sem despertador. O acumulado aparece.","Metade da semana. Energia intacta. Segredo: 22:30, protocolo, 8h.","Meu corpo nao diferencia segunda de quarta. Mesmo protocolo.","Metade do caminho. To exatamente igual a segunda."];
+// HABITOS QUA: banho gelado + alongamento
+var h1Fo=["Video sem fala + texto","Boomerang + texto","Video sem fala + texto","Foto + texto"];
+var h1Fa=["Banho gelado. Terceiro dia. O corpo nao negocia mais.","O gelado e ruim? E. Mas o que vem depois e bom demais.","Agua gelada. Cortisol natural. Dopamina natural.","[X] dias de banho gelado. O corpo nao questiona."];
+var h2Fa=["Alongamento. O corpo carrega tensao do sono. Isso tira.","Alongamento antes do treino. 5 minutos. O corpo precisa.","Alongamento. Libera o que o corpo segurou dormindo.","[X] dias de treino no corpo. Precisa soltar."];
+var caixa=["Trabalhar mais = produzir mais? (caixinha opiniao)","Cafe depois das 14h? (enquete: Todo dia / As vezes / Nunca)","Descanso pra voce e o que? (caixinha)","Voce faz pausa no trabalho? (enquete)"];
+s.push(mk("06:30","B1","Abertura S1 - metade da semana",s1Fo[i],"Janela","Janela, livro cabeceira",s1Fa[i]));
+s.push(mk("06:30","B1","Abertura S2 - acumulado",s2Fo[i],"--","Rosto ou cafe",s2Fa[i]));
+s.push(mk("06:30","B2","Banho gelado - terceiro dia",h1Fo[i],"Banheiro","Chuveiro, reacao, agua",h1Fa[i]));
+s.push(mk("06:50","B2","Rayhan curto (45 min)","Storyvlog","Mesa","Computador","45 min de producao. Depois: treino."));
+s.push(mk("07:35","B2","Alongamento - antes do treino","Foto + texto","Quarto / janela","Bracos esticando, silhueta",h2Fa[i]));
+s.push(mk("07:50","B2","Treino","Video sem fala + texto","Academia","Execucao, peso","Terceiro dia seguido. O corpo ta condicionado."));
+s.push(mk("09:30","B2","Corrida","Video sem fala + texto","Ar livre","Percurso, paisagem","O estresse sai pelas pernas. Metade da semana limpa."));
+s.push(mk("10:15","B3","Aula faculdade","Foto + texto","Sala","Caderno","Contexto."));
+s.push(mk("11:00","B4","Caixinha - opiniao","Foto + sticker","Cafe, mesa","--",caixa[i]));
+}
+else if(day==="Quinta"){
+// Angulo: previa do protocolo. S2 SEMPRE gancho.
+var s1Fo=["Video falando","Video sem fala + texto","Print de tela","Foto + texto"];
+var s1Fa=["Dormi 22:30, acordei sem despertador. Hoje: protocolo completo.","06:30. Quinta. Sem despertador. 4 dias seguidos.","Quinta. Mais uma noite de 8h. O dia comecou ontem.","Dormi 22:30. Acordei 06:28. O corpo tem relogio proprio."];
+var s2Fa=["Nao e genetica. E protocolo. Hoje voces vao ver. Fica ate o final.","4 noites, 4 manhas sem alarme. Coincidencia? Hoje provo que nao.","Hoje a noite: passo a passo. 19h ate 22:30. 15+ etapas. Cola.","Esse cenario me fez dormir. Hoje voces vao ver ao vivo."];
+// HABITOS QUI: respiracao + sol
+var h1Fo=["Foto + texto","Video sem fala + texto","Foto + texto","Video sem fala + texto"];
+var h1Fa=["Respiracao diafragmatica. 5 min. O dia comeca calmo por dentro.","Respiracao. O sistema nervoso precisa saber que ta tudo bem.","5 min de respiracao antes de tudo. O corpo precisa de calma.","Respiracao. Nos dois extremos do dia eu cuido."];
+var h2Fa=["Sol. Melatonina desliga. O relogio biologico calibra.","Sol. Primeiro contato. Luz natural nos olhos.","Pos-banho. Sol. O corpo acorda de verdade.","Sol na cara. Sem cafe. O jeito mais antigo de acordar."];
+var enq=["Ultimo horario de tela? (enquete: 21h/22h/23h/Meia-noite+)","Voce tem rotina antes de dormir? (enquete: Sim/Falho/Nao/Que rotina?)","Quantas horas dorme? (enquete: 4-5/5-6/6-7/7-8+)","Acorda com despertador? (enquete: Sempre/As vezes/Nunca/10 alarmes)"];
+s.push(mk("06:30","B1","Abertura S1 - previa protocolo",s1Fo[i],"Quarto","Rosto, objetos protocolo",s1Fa[i]));
+s.push(mk("06:30","B1","Abertura S2 - GANCHO protocolo (FIXO)","Video falando ou Foto","--","Rosto, objetos cabeceira",s2Fa[i]));
+s.push(mk("06:30","B2","Respiracao diafragmatica",h1Fo[i],"Quarto","Mao no peito, olhos fechados",h1Fa[i]));
+s.push(mk("06:35","B2","Sol - luz natural","Foto + texto","Janela","Rosto na janela, luz",h2Fa[i]));
+s.push(mk("06:50","B2","Rayhan - produzindo protocolo","Storyvlog","Mesa","Computador","Produzindo conteudo do protocolo de hoje."));
+s.push(mk("09:30","B4","Enquete - dados pro protocolo","Foto + sticker","Pos-treino","--",enq[i]));
+s.push(mk("10:10","B2","Treino","Video sem fala + texto","Academia","Execucao","Depois de 3h producao, agora o corpo."));
+s.push(mk("11:30","B2","Corrida + gancho noite","Video falando (5s)","Ar livre","Suado","4 dias de treino. O sono sustenta. Hoje voces vao ver."));
+}
+else if(day==="Sexta"){
+// Angulo: protocolo nao tira folga
+var s1Fo=["Foto + texto","Video sem fala + texto","Tela preta + texto","Print de tela"];
+var s1Fa=["Sexta. 06:30. Mesmo horario. O protocolo nao tira folga.","O corpo nao sabe que e sexta. E esse e o ponto.","A maioria ja ta planejando dormir meia-noite. Eu vou 22:30.","Sexta. 5 noites. 5x 22:30. 5x 06:30. Consistencia."];
+var s2Fa=["A tentacao de dormir tarde e real. Mas a segunda cobra.","5 dias no mesmo horario. O fim de semana nao vai quebrar.","Sexta de manha. Quem dormiu ta aqui.","Uma noite mal dormida reseta 5 dias. Nao vale."];
+// HABITOS SEX: banho gelado + sem celular
+var h1Fa=["Banho gelado. Inclusive na sexta. O corpo nao sabe que dia e.","5 dias de gelado. O corpo parou de reclamar. Agora espera.","Gelado na sexta. A mesma escolha. Abrir o registro.","Banho gelado. [X] dias. O corpo nao negocia."];
+var h2Fa=["Sem celular. Zero notificacao. A manha e minha.","Sem celular ate agora. A manha nao comeca com notificacao.","Celular longe. A maioria acorda e inunda o cerebro. Eu prefiro agua.","30 min sem celular. Parece pouco. Testa 1 semana."];
+var caixa=["O que muda na sua rotina no fim de semana? (caixinha)","Voce vai dormir mais tarde porque e sexta? (caixinha)","Fim de semana dorme mais tarde? (enquete: Sim/As vezes/Nunca)","O que voce faz pra desligar do trabalho? (caixinha)"];
+s.push(mk("06:30","B1","Abertura S1 - protocolo nao tira folga",s1Fo[i],"Janela / quarto","Janela, tenis",s1Fa[i]));
+s.push(mk("06:30","B1","Abertura S2 - sexta nao e desculpa","Video falando (5s)","--","Rosto, agua",s2Fa[i]));
+s.push(mk("06:30","B2","Banho gelado - inclusive na sexta","Video sem fala + texto","Banheiro","Chuveiro, agua",h1Fa[i]));
+s.push(mk("06:35","B2","Sem celular - a manha e minha","Foto + texto","Quarto","Celular longe, virado, modo aviao",h2Fa[i]));
+s.push(mk("06:50","B2","Treino - 5 dias seguidos","Foto + texto","Caminho","Tenis","5 dias seguidos. Sexta de manha."));
+s.push(mk("08:15","B2","Pos-treino","Video falando (5s)","Academia","Rosto suado","O fim de semana nao e pra destruir - e pra manter."));
+s.push(mk("08:45","B3","Aula faculdade","Foto + texto","Sala","Caderno","Contexto."));
+s.push(mk("09:00","B4","Caixinha - fim de semana","Foto + sticker","--","--",caixa[i]));
+s.push(mk("10:15","B3","Segunda aula","Foto + texto","Sala","Material","Contexto."));
+}
+else if(day==="Sabado"){
+// Angulo: mesmo horario fim de semana
+var s1Fo=["Video falando (5s)","Video sem fala + texto","Video falando (5s)","Foto + texto"];
+var s1Fa=["Sabado. A maioria vai acordar meio-dia. Eu ja to de pe.","Sabado. 06:30. Sem pressa. Sem bagunca no relogio.","06:30 no sabado. Nao e disciplina. E que dormi 22:30.","Sabado. [X] dias seguidos. O corpo agradece."];
+var s2Fa=["Descanso nao e dormir 12h. E manter o ritmo sem obrigacao.","6 dias no mesmo horario. Consistencia nao e so dia util.","O segredo do sono bom na segunda e nao destruir o padrao hoje.","O corpo agradece consistencia mais do que descanso."];
+// HABITOS SAB: grounding + alongamento
+var h1Fa=["Grounding. Pe no chao. Sabado tambem.","Pe descalco na grama. O corpo precisa do chao.","Grounding. 2 minutos. O corpo acorda com isso, nao com celular.","Grounding. O ritual mais simples. Sabado sem pressa."];
+var h2Fa=["Alongamento. Sem pressa. Sabado. Ritmo mais lento.","Alongamento no sabado. O corpo precisa soltar.","5 min de alongamento. Sem cobranca. Sabado.","Alongamento e respiracao. Sabado calmo."];
+s.push(mk("06:30","B1","Abertura S1 - mesmo horario sabado",s1Fo[i],"Varanda / janela","Rosto, sol, varanda",s1Fa[i]));
+s.push(mk("06:30","B1","Abertura S2 - descanso real","Foto + texto","--","Ambiente calmo, cama arrumada",s2Fa[i]));
+s.push(mk("06:30","B2","Grounding - pe no chao","Foto + texto","Varanda / grama","Pes descalcos",h1Fa[i]));
+s.push(mk("06:35","B2","Alongamento - sem pressa","Video sem fala + texto","Quarto / varanda","Silhueta alongando",h2Fa[i]));
+s.push(mk("06:50","B2","Treino","Video sem fala + texto","Ar livre","Tenis, percurso","Treino. Sabado. Mesmo horario."));
+s.push(mk("07:30","B2","Corrida - rua vazia sabado","Video sem fala + texto","Ar livre","Paisagem, rua vazia","Corrida. Rua vazia. O estresse sai pelas pernas."));
+s.push(mk("09:30","B4","Caixinha pessoal","Foto + sticker","Cafe, livro","--","Pergunte qualquer coisa - menos sobre sono."));
+}
+else if(day==="Domingo"){
+// Angulo: sono define segunda. S1 SEMPRE foto calma.
+var s1Fa=["Domingo. 06:30. O sono de hoje define a segunda. O dia comecou ontem.","Domingo. 7 dias no mesmo horario. Semana completa.","A semana que vem comeca hoje. No sono de hoje.","Domingo. Ultima manha da semana. Mesmo horario da primeira."];
+var s2Fa=["Amanha e o dia mais pesado. A preparacao comeca agora.","Hoje a noite e o sono mais importante da semana.","Domingo tranquilo. Mas o protocolo de hoje define a segunda.","A semana comeca hoje. Nao amanha. No sono de hoje."];
+// HABITOS DOM: caminhada + respiracao
+var h1Fa=["Caminhada. Ar fresco. O corpo acorda por completo. Sem treino pesado.","Caminhada leve de domingo. Movimento sem cobranca.","Caminhada. 5 minutos. Descanso ativo. O corpo nao fica parado.","Caminhada e ar fresco. Domingo. Descanso e movimento."];
+var h2Fa=["Respiracao. 5 minutos. O dia comeca calmo.","Respiracao diafragmatica. Domingo. Calma antes de tudo.","Respiracao. Nos dois extremos do dia eu cuido. Manha e noite.","5 min de respiracao. O sistema nervoso agradece."];
+var caixa=["Qual tema voces querem que aprofunde essa semana? (caixinha)","Sobre o que tem mais duvida: sono, estresse ou produtividade? (caixinha)","O que voces gostariam de ver mais aqui? (caixinha)","Se pudesse me definir em 2 palavras, quais? (caixinha percepcao)"];
+s.push(mk("06:30","B1","Abertura S1 - sono define segunda (FOTO CALMA fixo)","Foto calma (fixo)","Janela luz suave","Luz suave, cama, livro",s1Fa[i]));
+s.push(mk("06:30","B1","Abertura S2 - semana comeca hoje","Foto + texto / Video falando","--","Agua, sol, livro",s2Fa[i]));
+s.push(mk("06:30","B2","Caminhada leve - descanso ativo","Foto + texto","Ar livre","Rua calma, paisagem",h1Fa[i]));
+s.push(mk("06:35","B2","Respiracao - calma","Video sem fala + texto","Quarto / varanda","Mao no peito, olhos fechados",h2Fa[i]));
+s.push(mk("07:00","B2","Leitura de manha","Foto + texto","Ambiente calmo","Livro aberto, luz suave","Leitura. Domingo. Sem treino pesado. Descanso ativo."));
+s.push(mk("07:30","B2","Caminhada longa ou livre","Video sem fala + texto","Ar livre","Paisagem, rua calma","Movimento leve. O corpo nao fica parado."));
+s.push(mk("09:30","B4","Caixinha - pesquisa de conteudo","Foto + sticker","Caderno, cafe","--",caixa[i]));
+}
+return s;
 }
 
-var ANGLES={"Segunda":"Peso + contraste com sono","Terca":"Consistencia silenciosa","Quarta":"Metade da semana - Acumulado","Quinta":"DIA DO PROTOCOLO COMPLETO","Sexta":"O protocolo nao tira folga","Sabado":"Mesmo horario no fim de semana","Domingo":"Sono de hoje define a segunda"};
-var WEEKLABEL=["SEMANA 1 - Mostrar a rotina","SEMANA 2 - Aprofundar","SEMANA 3 - Significado","SEMANA 4 - Marco"];
+function buildWeek(w){var d={};DAYS.forEach(function(day){var m=manhaWeek(day,w);var fds=(day==="Sabado"||day==="Domingo");d[day]=m.concat(tardeWeek(w,fds))});return d}
 
+var ANGLES={"Segunda":"Peso + contraste com sono","Terca":"Consistencia silenciosa","Quarta":"Metade da semana - Acumulado","Quinta":"DIA DO PROTOCOLO COMPLETO","Sexta":"O protocolo nao tira folga","Sabado":"Mesmo horario no fim de semana","Domingo":"Sono de hoje define a segunda"};
+var WLABEL=["SEMANA 1 - Mostrar rotina","SEMANA 2 - Aprofundar","SEMANA 3 - Significado","SEMANA 4 - Marco"];
 var st={day:0,view:"daily",week:0,done:{}};
-try{var dow=new Date().getDay();st.day=dow===0?6:dow-1}catch(x){st.day=0}
+try{var dow=new Date().getDay();st.day=dow===0?6:dow-1}catch(x){}
 try{var sd=localStorage.getItem('rs4d');if(sd)st.done=JSON.parse(sd)}catch(x){}
 try{var sw=localStorage.getItem('rs4w');if(sw)st.week=parseInt(sw)||0}catch(x){}
-
 function getData(){return buildWeek(st.week)}
 function save(){try{localStorage.setItem('rs4d',JSON.stringify(st.done));localStorage.setItem('rs4w',String(st.week))}catch(x){}}
 function esc(s){return s?String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'):'--'}
 
 function R(){
 try{
-var data=getData();
-var a=document.getElementById('app');var h='';
+var data=getData();var a=document.getElementById('app');var h='';
 h+='<div style="padding:14px 10px 4px;display:flex;align-items:center;gap:8px"><div style="width:28px;height:28px;background:#e94560;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;color:#fff;font-family:monospace">R</div><div><div style="font-size:14px;font-family:monospace;font-weight:800;color:#fff">Rayhan Stories</div><div style="color:#2a2a2a;font-size:8px;font-family:monospace;letter-spacing:2px">CONTROLE DE STORIES</div></div></div>';
-h+='<div style="display:flex;gap:4px;padding:6px 10px;position:sticky;top:0;background:#050508;z-index:50">';
-h+='<button style="flex:1;padding:9px;border-radius:7px;font-size:11px;font-weight:700;font-family:monospace;background:'+(st.view==='daily'?'#e94560':'#0c0c18')+';color:'+(st.view==='daily'?'#fff':'#555')+'" onclick="SV(\'daily\')">Dia</button>';
-h+='<button style="flex:1;padding:9px;border-radius:7px;font-size:11px;font-weight:700;font-family:monospace;background:'+(st.view==='blocks'?'#e94560':'#0c0c18')+';color:'+(st.view==='blocks'?'#fff':'#555')+'" onclick="SV(\'blocks\')">Blocos</button>';
-h+='</div>';
-
-// Week selector
-h+='<div style="display:flex;align-items:center;justify-content:center;gap:12px;padding:6px 10px">';
-h+='<button style="background:none;border:1px solid #222;color:#888;border-radius:50%;width:28px;height:28px;font-size:12px" onclick="SW(-1)"><</button>';
-h+='<span style="color:#e94560;font-family:monospace;font-size:11px;font-weight:700;text-align:center;min-width:180px">'+WEEKLABEL[st.week]+'</span>';
-h+='<button style="background:none;border:1px solid #222;color:#888;border-radius:50%;width:28px;height:28px;font-size:12px" onclick="SW(1)">></button>';
-h+='</div>';
-
+h+='<div style="display:flex;gap:4px;padding:6px 10px;position:sticky;top:0;background:#050508;z-index:50"><button style="flex:1;padding:9px;border-radius:7px;font-size:11px;font-weight:700;font-family:monospace;background:'+(st.view==='daily'?'#e94560':'#0c0c18')+';color:'+(st.view==='daily'?'#fff':'#555')+'" onclick="SV(\'daily\')">Dia</button><button style="flex:1;padding:9px;border-radius:7px;font-size:11px;font-weight:700;font-family:monospace;background:'+(st.view==='blocks'?'#e94560':'#0c0c18')+';color:'+(st.view==='blocks'?'#fff':'#555')+'" onclick="SV(\'blocks\')">Blocos</button></div>';
+h+='<div style="display:flex;align-items:center;justify-content:center;gap:12px;padding:6px 10px"><button style="background:none;border:1px solid #222;color:#888;border-radius:50%;width:28px;height:28px;font-size:12px" onclick="SW(-1)"><</button><span style="color:#e94560;font-family:monospace;font-size:11px;font-weight:700;text-align:center;min-width:200px">'+WLABEL[st.week]+'</span><button style="background:none;border:1px solid #222;color:#888;border-radius:50%;width:28px;height:28px;font-size:12px" onclick="SW(1)">></button></div>';
 if(st.view==='daily')h+=RD(data);else h+=RBL(data);
 a.innerHTML=h;
 }catch(err){document.getElementById('app').innerHTML='<div style="color:#e94560;padding:20px;font-family:monospace"><h2>Erro</h2><p>'+err.message+'</p><button style="margin-top:10px;padding:8px 16px;background:#e94560;color:#fff;border:none;border-radius:5px" onclick="localStorage.clear();location.reload()">Limpar e recarregar</button></div>'}}
@@ -261,7 +264,6 @@ var h='<div style="display:flex;gap:3px;padding:8px 10px;overflow-x:auto">';
 for(var i=0;i<DAYS.length;i++){h+='<button style="flex:0 0 auto;padding:6px 12px;border-radius:14px;font-size:11px;font-weight:700;font-family:monospace;background:'+(st.day===i?'#e94560':'#0c0c18')+';color:'+(st.day===i?'#fff':'#555')+'" onclick="SD('+i+')">'+DAYSD[i].substring(0,3)+'</button>'}
 h+='</div>';
 h+='<div style="margin:2px 10px 6px;background:#09090f;border:1px solid #141425;border-radius:10px;padding:12px"><div style="display:flex;justify-content:space-between"><div><div style="font-size:17px;font-family:monospace;font-weight:800;color:#fff">'+DAYSD[st.day]+'</div><div style="color:#e94560;font-size:10px;font-family:monospace;font-weight:700;margin-top:3px">'+ANGLES[day]+'</div></div><span style="color:'+(dc===t?'#2a7a2a':'#e94560')+';font-size:12px;font-family:monospace;font-weight:800">'+dc+'/'+t+'</span></div><div style="margin-top:8px;height:3px;background:#0c0c0c;border-radius:2px;overflow:hidden"><div style="height:100%;border-radius:2px;width:'+p+'%;background:'+(dc===t?'#2a7a2a':'#e94560')+'"></div></div></div>';
-
 for(var i=0;i<ss.length;i++){
 var s=ss[i];var k=st.week+'-'+st.day+'-'+i;var dn=st.done[k]||false;var bl=BM[s.b]||BM.B3;
 h+='<div style="background:'+(dn?'#060d06':'#09090f')+';border:1px solid '+(dn?'#1a3a1a':'#141425')+';border-left:3px solid '+bl.c+';border-radius:10px;margin:0 10px 6px;opacity:'+(dn?'0.45':'1')+'">';
@@ -271,44 +273,34 @@ h+='<div style="flex:1;min-width:0">';
 h+='<div style="display:flex;justify-content:space-between;align-items:center"><span style="color:'+bl.c+';font-size:8px;font-weight:800;letter-spacing:1.5px;font-family:monospace">'+bl.e+' '+bl.n+'</span><span style="color:#e94560;font-size:13px;font-family:monospace;font-weight:800">'+esc(s.t)+'</span></div>';
 h+='<p style="color:'+(dn?'#333':'#e8e8f0')+';font-size:13px;font-weight:600;line-height:1.3;margin:3px 0 0;text-decoration:'+(dn?'line-through':'none')+'">'+esc(s.d)+'</p>';
 h+='<div style="margin-top:8px;display:grid;grid-template-columns:1fr 1fr;gap:4px 8px">';
-h+='<div><div style="color:#555;font-size:8px;font-weight:700;letter-spacing:1px;font-family:monospace">FORMATO</div><p style="color:'+(dn?'#2a2a2a':'#8888aa')+';font-size:11px;line-height:1.3;margin:1px 0 0">'+esc(s.fo)+'</p></div>';
-h+='<div><div style="color:#555;font-size:8px;font-weight:700;letter-spacing:1px;font-family:monospace">CENARIO</div><p style="color:'+(dn?'#2a2a2a':'#8888aa')+';font-size:11px;line-height:1.3;margin:1px 0 0">'+esc(s.ce)+'</p></div>';
-h+='<div><div style="color:#555;font-size:8px;font-weight:700;letter-spacing:1px;font-family:monospace">ELEMENTOS</div><p style="color:'+(dn?'#2a2a2a':'#8888aa')+';font-size:11px;line-height:1.3;margin:1px 0 0">'+esc(s.el)+'</p></div>';
-h+='<div style="grid-column:1/3"><div style="color:#555;font-size:8px;font-weight:700;letter-spacing:1px;font-family:monospace">FALA / TEXTO</div><p style="color:'+(dn?'#2a2a2a':'#c0c0d8')+';font-size:11px;line-height:1.4;margin:1px 0 0;font-style:italic">'+esc(s.fa)+'</p></div>';
+h+='<div><div style="color:#555;font-size:8px;font-weight:700;letter-spacing:1px;font-family:monospace">FORMATO</div><p style="color:'+(dn?'#2a2a2a':'#8888aa')+';font-size:11px;margin:1px 0 0">'+esc(s.fo)+'</p></div>';
+h+='<div><div style="color:#555;font-size:8px;font-weight:700;letter-spacing:1px;font-family:monospace">CENARIO</div><p style="color:'+(dn?'#2a2a2a':'#8888aa')+';font-size:11px;margin:1px 0 0">'+esc(s.ce)+'</p></div>';
+h+='<div><div style="color:#555;font-size:8px;font-weight:700;letter-spacing:1px;font-family:monospace">ELEMENTOS</div><p style="color:'+(dn?'#2a2a2a':'#8888aa')+';font-size:11px;margin:1px 0 0">'+esc(s.el)+'</p></div>';
+h+='<div style="grid-column:1/3"><div style="color:#555;font-size:8px;font-weight:700;letter-spacing:1px;font-family:monospace">FALA / TEXTO</div><p style="color:'+(dn?'#2a2a2a':'#c0c0d8')+';font-size:11px;margin:1px 0 0;font-style:italic">'+esc(s.fa)+'</p></div>';
 h+='</div>';
 h+='<div style="margin-top:8px"><button style="background:#0c0c18;border:1px solid #1a1a2e;color:#888;border-radius:5px;padding:4px 10px;font-size:9px;font-weight:700;font-family:monospace" onclick="TG('+i+')">'+(dn?'Desfazer':'Feito')+'</button></div>';
-h+='</div></div></div>';
-}
-h+='<div style="height:60px"></div>';
-return h;
-}
+h+='</div></div></div>';}
+h+='<div style="height:60px"></div>';return h}
 
 function RBL(data){
 var h='<div style="padding:10px;padding-bottom:80px"><h2 style="font-size:15px;font-family:monospace;margin-bottom:10px;color:#fff">7 Blocos</h2>';
-for(var j=0;j<BLOCKS.length;j++){
-var b=BLOCKS[j];var c=0;
-for(var di=0;di<DAYS.length;di++){var arr=data[DAYS[di]]||[];for(var si=0;si<arr.length;si++){if(arr[si].b===b.id)c++}}
-h+='<button style="width:100%;display:flex;align-items:center;gap:10px;background:#09090f;border:1px solid '+b.c+'33;border-left:3px solid '+b.c+';border-radius:8px;padding:12px;margin-bottom:5px;text-align:left" onclick="OB(\''+b.id+'\')">';
-h+='<span style="font-size:16px;width:24px;text-align:center">'+b.e+'</span><div style="flex:1"><div style="font-size:13px;font-family:monospace;color:#fff;font-weight:700">'+b.n+'</div><div style="color:#666;font-size:9px;font-family:monospace">'+c+' stories/semana</div></div><span style="color:#444">-></span></button>'}
+for(var j=0;j<BLOCKS.length;j++){var b=BLOCKS[j];var c=0;for(var di=0;di<DAYS.length;di++){var arr=data[DAYS[di]]||[];for(var si=0;si<arr.length;si++){if(arr[si].b===b.id)c++}}
+h+='<button style="width:100%;display:flex;align-items:center;gap:10px;background:#09090f;border:1px solid '+b.c+'33;border-left:3px solid '+b.c+';border-radius:8px;padding:12px;margin-bottom:5px;text-align:left" onclick="OB(\''+b.id+'\')"><span style="font-size:16px;width:24px;text-align:center">'+b.e+'</span><div style="flex:1"><div style="font-size:13px;font-family:monospace;color:#fff;font-weight:700">'+b.n+'</div><div style="color:#666;font-size:9px;font-family:monospace">'+c+' stories/semana</div></div><span style="color:#444">-></span></button>'}
 h+='</div>';return h}
 
 window.SV=function(v){st.view=v;R()};
 window.SD=function(d){st.day=d;R()};
 window.SW=function(dir){st.week=st.week+dir;if(st.week<0)st.week=3;if(st.week>3)st.week=0;save();R()};
 window.TG=function(i){var k=st.week+'-'+st.day+'-'+i;st.done[k]=!st.done[k];save();R()};
-
-window.OB=function(id){
-var data=getData();var b=BM[id];var a=document.getElementById('app');
+window.OB=function(id){var data=getData();var b=BM[id];var a=document.getElementById('app');
 var h='<div style="padding:14px 10px 4px;display:flex;align-items:center;gap:8px"><div style="width:28px;height:28px;background:#e94560;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;color:#fff;font-family:monospace">R</div><div><div style="font-size:14px;font-family:monospace;font-weight:800;color:#fff">Rayhan Stories</div></div></div>';
 h+='<div style="display:flex;gap:4px;padding:6px 10px;position:sticky;top:0;background:#050508;z-index:50"><button style="flex:1;padding:9px;border-radius:7px;font-size:11px;font-weight:700;font-family:monospace;background:#0c0c18;color:#555" onclick="SV(\'daily\')">Dia</button><button style="flex:1;padding:9px;border-radius:7px;font-size:11px;font-weight:700;font-family:monospace;background:#e94560;color:#fff" onclick="SV(\'blocks\')">Blocos</button></div>';
-h+='<div style="padding:10px;padding-bottom:80px">';
-h+='<button style="background:#0c0c18;border:1px solid #1a1a2e;color:#555;border-radius:6px;padding:5px 12px;font-size:10px;font-family:monospace;margin-bottom:10px" onclick="SV(\'blocks\')"><- Voltar</button>';
+h+='<div style="padding:10px;padding-bottom:80px"><button style="background:#0c0c18;border:1px solid #1a1a2e;color:#555;border-radius:6px;padding:5px 12px;font-size:10px;font-family:monospace;margin-bottom:10px" onclick="SV(\'blocks\')"><- Voltar</button>';
 h+='<div style="background:#09090f;border:1px solid '+b.c+'33;border-left:4px solid '+b.c+';border-radius:10px;padding:14px;margin-bottom:12px"><span style="font-size:16px">'+b.e+'</span><h2 style="color:#fff;font-size:17px;margin:4px 0 0;font-family:monospace">'+b.n+'</h2></div>';
 for(var di=0;di<DAYS.length;di++){var day=DAYS[di];var items=[];var arr=data[day]||[];for(var si=0;si<arr.length;si++){if(arr[si].b===id)items.push(arr[si])}if(!items.length)continue;
 h+='<div style="margin-bottom:12px"><h3 style="color:'+b.c+';font-size:10px;font-family:monospace;font-weight:800;letter-spacing:1.5px;margin-bottom:5px">'+DAYSD[di].toUpperCase()+'</h3>';
 for(var si=0;si<items.length;si++){var s=items[si];h+='<div style="background:#09090f;border:1px solid #141425;border-radius:7px;padding:8px 10px;margin-bottom:3px"><div style="display:flex;justify-content:space-between;margin-bottom:3px"><span style="color:#ccc;font-size:11px;font-weight:600">'+esc(s.d)+'</span><span style="color:#e94560;font-size:10px;font-family:monospace;font-weight:800">'+esc(s.t)+'</span></div><div style="color:#555;font-size:9px;font-family:monospace">'+esc(s.fo)+' | '+esc(s.ce)+'</div><p style="color:#777;font-size:9px;font-family:monospace;font-style:italic;margin:3px 0 0">'+esc(s.fa)+'</p></div>'}h+='</div>'}
 h+='</div>';a.innerHTML=h};
-
 R();
 }catch(e){document.getElementById('app').innerHTML='<div style="color:red;padding:20px;font-family:monospace">'+e.message+'<br><button onclick="localStorage.clear();location.reload()" style="margin-top:10px;padding:8px;background:#e94560;color:#fff;border:none;border-radius:5px">Reset</button></div>'}
 </script>
